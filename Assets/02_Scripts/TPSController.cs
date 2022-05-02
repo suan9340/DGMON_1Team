@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TPSController : MonoBehaviour
 {
@@ -14,6 +15,10 @@ public class TPSController : MonoBehaviour
     [Header("걷는속도")][Range(0f, 20f)] public float walkSpeed = 8f;
     [Header("감도")][Range(0f, 10f)] public float sensivity;
     [Header("점프 힘")][Range(0f, 10f)] public float jumpPower = 2f;
+
+    [Header("------UI 관련된------")]
+    public Slider gazeSlider = null;
+    [Range(0f, 1f)] public float gazeSpeed = 2f;
 
     private float speed;
 
@@ -34,6 +39,7 @@ public class TPSController : MonoBehaviour
 
     private void Update()
     {
+        UISet();
         if (GameManager.Instance.gameState == GameState.isSetting)
             return;
         PlayGameSet();
@@ -46,6 +52,12 @@ public class TPSController : MonoBehaviour
         SpeedControl();
         Jump();
     }
+
+    private void UISet()
+    {
+        SettingGazeSlider();
+    }
+
     private void Move()
     {
         isRun = Input.GetKey(KeyCode.LeftShift);
@@ -72,7 +84,10 @@ public class TPSController : MonoBehaviour
     private void SpeedControl()
     {
         if (isRun)
+        {
+            CountSlider();
             speed = runSpeed;
+        }
         else if (isWalk)
             speed = walkSpeed;
         else
@@ -120,6 +135,24 @@ public class TPSController : MonoBehaviour
         cameraArm.rotation = Quaternion.Euler(_x, _cameraAngle.y + _mouseDelta.x, _cameraAngle.z); ;
 
 
+    }
+
+    private void SettingGazeSlider()
+    {
+        if (gazeSlider.value >= 1) return;
+        gazeSlider.value += Time.deltaTime * gazeSpeed;
+    }
+
+    private void CountSlider()
+    {
+        // gazeSlider.value <=0 일 때 못뛰게 하기
+        if (gazeSlider.value <= 0) return;
+        gazeSlider.value -= 0.003f;
+
+        if(gazeSlider.value <=0.3f)
+        {
+            // fill 색 바꾸는 코드 작성
+        }
     }
 
     public void SetGameState(GameState _state)
