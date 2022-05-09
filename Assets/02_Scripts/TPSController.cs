@@ -19,6 +19,8 @@ public class TPSController : MonoBehaviour
     [Header("------UI 관련된------")]
     public Slider gazeSlider = null;
     [Range(0f, 1f)] public float gazeSpeed = 2f;
+    [Header("게이지 슬라이더 색상 오브제")] public Image fillImage = null;
+    public List<Color> fillColors = new List<Color>();
 
     private float speed;
 
@@ -31,6 +33,7 @@ public class TPSController : MonoBehaviour
 
     private Rigidbody myrigid;
     private Animator myanim;
+
     private void Awake()
     {
         myrigid = GetComponent<Rigidbody>();
@@ -45,6 +48,7 @@ public class TPSController : MonoBehaviour
         PlayGameSet();
     }
 
+    // GameSetting
     private void PlayGameSet()
     {
         LookAround();
@@ -77,10 +81,12 @@ public class TPSController : MonoBehaviour
         }
 
         myanim.SetBool("isWalk", isMove);
-        myanim.SetBool("isRun", isRun);
         myanim.SetBool("isSlowWalk", isWalk);
+        myanim.SetBool("isRun", isRun);
     }
 
+
+    // run, walk, slow walk ... Control Player Speed
     private void SpeedControl()
     {
         if (isRun)
@@ -94,6 +100,8 @@ public class TPSController : MonoBehaviour
             speed = normalSpeed;
     }
 
+
+    // Player jump
     private void Jump()
     {
         jDown = Input.GetButtonDown("Jump");
@@ -107,6 +115,7 @@ public class TPSController : MonoBehaviour
     }
 
 
+    // if player on the floor, change can jump
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("Switch"))
@@ -117,6 +126,7 @@ public class TPSController : MonoBehaviour
     }
 
 
+    // Input User MousePosition and rotate Camera 
     private void LookAround()
     {
         Vector2 _mouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")) * sensivity;
@@ -137,24 +147,47 @@ public class TPSController : MonoBehaviour
 
     }
 
+
+    // Plus Player Gaze(Setting GazeUI)
     private void SettingGazeSlider()
     {
         if (gazeSlider.value >= 1) return;
         gazeSlider.value += Time.deltaTime * gazeSpeed;
     }
 
+
+    // if PlayerSlider is low, change Color and can't run
     private void CountSlider()
     {
-        // gazeSlider.value <=0 일 때 못뛰게 하기
-        if (gazeSlider.value <= 0) return;
-        gazeSlider.value -= 0.003f;
+        gazeSlider.value -= 0.001f;
 
-        if(gazeSlider.value <=0.3f)
+        if (gazeSlider.value <= 0.5f)
         {
-            // fill 색 바꾸는 코드 작성
+            if (gazeSlider.value <= 0.3f)
+                SettingSliderColor(2);
+            SettingSliderColor(1);
         }
+        else
+            SettingSliderColor(0);
+
+        // gazeSlider.value <=0 일 때 못뛰게 하기
+        if (gazeSlider.value <= 0)
+        {
+
+            return;
+        }
+
+
+        
     }
 
+
+    // Change Slider Color with Values
+    private void SettingSliderColor(int _num)
+    {
+        fillImage.color = fillColors[_num];
+    }
+    // Setting GameManager GameState
     public void SetGameState(GameState _state)
     {
         GameManager.Instance.gameState = _state;
