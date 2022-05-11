@@ -4,24 +4,18 @@ using UnityEngine;
 
 public class Puzzle1 : MonoBehaviour
 {
-    public Material material1 = null;
-    public Material material2 = null;
+    private Rigidbody myrigid;
 
-    public List<GameObject> puzzleObj = new List<GameObject>();
-
-
-    // Change cube material others
-    private void ChangeMaterial(int _num)
+    private void Awake()
     {
-
+        myrigid = GetComponent<Rigidbody>();
     }
 
-
-    // Change cube Conditions
-    private void ChangeSetPuzzle()
+    private void OnCollisionEnter(Collision collision)
     {
-
+        if(collision.gameObject.CompareTag("PuzzleCube"))
+        {
+            collision.gameObject.GetComponent<Renderer>().material.color = Color.gray;
+        }
     }
-
-
 }

@@ -118,7 +118,7 @@ public class TPSController : MonoBehaviour
     // if player on the floor, change can jump
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("Switch"))
+        if (collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("Switch") || collision.gameObject.CompareTag("PuzzleCube"))
         {
             myanim.SetBool("isJump", false);
             isJump = false;
