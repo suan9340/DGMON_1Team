@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TPSController : MonoBehaviour
 {
@@ -15,6 +16,12 @@ public class TPSController : MonoBehaviour
     [Header("감도")][Range(0f, 10f)] public float sensivity;
     [Header("점프 힘")][Range(0f, 10f)] public float jumpPower = 2f;
 
+    [Header("------UI 관련된------")]
+    public Slider gazeSlider = null;
+    [Range(0f, 1f)] public float gazeSpeed = 2f;
+    [Header("게이지 슬라이더 색상 오브제")] public Image fillImage = null;
+    public List<Color> fillColors = new List<Color>();
+
     private float speed;
 
     private bool isRun;
@@ -26,6 +33,7 @@ public class TPSController : MonoBehaviour
 
     private Rigidbody myrigid;
     private Animator myanim;
+
     private void Awake()
     {
         myrigid = GetComponent<Rigidbody>();
@@ -34,11 +42,13 @@ public class TPSController : MonoBehaviour
 
     private void Update()
     {
+        UISet();
         if (GameManager.Instance.gameState == GameState.isSetting)
             return;
         PlayGameSet();
     }
 
+    // GameSetting
     private void PlayGameSet()
     {
         LookAround();
@@ -46,6 +56,12 @@ public class TPSController : MonoBehaviour
         SpeedControl();
         Jump();
     }
+
+    private void UISet()
+    {
+        SettingGazeSlider();
+    }
+
     private void Move()
     {
         isRun = Input.GetKey(KeyCode.LeftShift);
@@ -65,20 +81,27 @@ public class TPSController : MonoBehaviour
         }
 
         myanim.SetBool("isWalk", isMove);
-        myanim.SetBool("isRun", isRun);
         myanim.SetBool("isSlowWalk", isWalk);
+        myanim.SetBool("isRun", isRun);
     }
 
+
+    // run, walk, slow walk ... Control Player Speed
     private void SpeedControl()
     {
         if (isRun)
+        {
+            CountSlider();
             speed = runSpeed;
+        }
         else if (isWalk)
             speed = walkSpeed;
         else
             speed = normalSpeed;
     }
 
+
+    // Player jump
     private void Jump()
     {
         jDown = Input.GetButtonDown("Jump");
@@ -92,9 +115,10 @@ public class TPSController : MonoBehaviour
     }
 
 
+    // if player on the floor, change can jump
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("Switch"))
+        if (collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("Switch") || collision.gameObject.CompareTag("PuzzleCube"))
         {
             myanim.SetBool("isJump", false);
             isJump = false;
@@ -102,6 +126,7 @@ public class TPSController : MonoBehaviour
     }
 
 
+    // Input User MousePosition and rotate Camera 
     private void LookAround()
     {
         Vector2 _mouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")) * sensivity;
@@ -122,6 +147,47 @@ public class TPSController : MonoBehaviour
 
     }
 
+
+    // Plus Player Gaze(Setting GazeUI)
+    private void SettingGazeSlider()
+    {
+        if (gazeSlider.value >= 1) return;
+        gazeSlider.value += Time.deltaTime * gazeSpeed;
+    }
+
+
+    // if PlayerSlider is low, change Color and can't run
+    private void CountSlider()
+    {
+        gazeSlider.value -= 0.001f;
+
+        if (gazeSlider.value <= 0.5f)
+        {
+            if (gazeSlider.value <= 0.3f)
+                SettingSliderColor(2);
+            SettingSliderColor(1);
+        }
+        else
+            SettingSliderColor(0);
+
+        // gazeSlider.value <=0 일 때 못뛰게 하기
+        if (gazeSlider.value <= 0)
+        {
+
+            return;
+        }
+
+
+        
+    }
+
+
+    // Change Slider Color with Values
+    private void SettingSliderColor(int _num)
+    {
+        fillImage.color = fillColors[_num];
+    }
+    // Setting GameManager GameState
     public void SetGameState(GameState _state)
     {
         GameManager.Instance.gameState = _state;

@@ -9,8 +9,8 @@ public class TuTorialManager : MonoBehaviour
 
     private Transform curretnTrn;
 
-    [Header("현재 튜토리얼 1단계 단계")]
-    [SerializeField] private int num = 0;
+    [SerializeField, Header("현재 튜토리얼 1단계 단계")]
+    private int num = 0;
 
     private void Start()
     {
