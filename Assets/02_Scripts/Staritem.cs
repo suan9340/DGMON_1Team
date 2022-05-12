@@ -7,6 +7,6 @@ public class Staritem : MonoBehaviour
     public float rotSpeed = 100f;
     void Update()
     {
-        transform.Rotate(new Vector3(0, rotSpeed * Time.deltaTime, 0));
+        transform.Rotate(new Vector3(transform.rotation.x, rotSpeed * Time.deltaTime, transform.rotation.z));
     }
 }

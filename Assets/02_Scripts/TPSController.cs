@@ -18,7 +18,8 @@ public class TPSController : MonoBehaviour
 
     [Header("------UI 관련된------")]
     public Slider gazeSlider = null;
-    [Range(0f, 1f)] public float gazeSpeed = 2f;
+    [Range(0f, 0.5f)] public float gazeSpeed = 1f;
+    [Range(0f, 0.5f)] public float gazeMinusSpeed = 1f;
     [Header("게이지 슬라이더 색상 오브제")] public Image fillImage = null;
     public List<Color> fillColors = new List<Color>();
 
@@ -28,6 +29,8 @@ public class TPSController : MonoBehaviour
     private bool isWalk;
     private bool jDown;
     private bool isJump;
+
+    private bool isCantrun;
 
     Vector3 moveDir = Vector3.zero;
 
@@ -82,6 +85,11 @@ public class TPSController : MonoBehaviour
 
         myanim.SetBool("isWalk", isMove);
         myanim.SetBool("isSlowWalk", isWalk);
+        if (isCantrun)
+        {
+            myanim.SetBool("isRun", false);
+            return;
+        }
         myanim.SetBool("isRun", isRun);
     }
 
@@ -89,10 +97,10 @@ public class TPSController : MonoBehaviour
     // run, walk, slow walk ... Control Player Speed
     private void SpeedControl()
     {
-        if (isRun)
+        if (isRun && isCantrun == false)
         {
-            CountSlider();
             speed = runSpeed;
+            CountSlider();
         }
         else if (isWalk)
             speed = walkSpeed;
@@ -151,36 +159,38 @@ public class TPSController : MonoBehaviour
     // Plus Player Gaze(Setting GazeUI)
     private void SettingGazeSlider()
     {
+        if (isCantrun)
+        {
+            SettingSliderColor(2);
+            if (gazeSlider.value >= 1)
+            {
+                SettingSliderColor(0);
+                isCantrun = false;
+            }
+        }
+
         if (gazeSlider.value >= 1) return;
+
         gazeSlider.value += Time.deltaTime * gazeSpeed;
     }
-
 
     // if PlayerSlider is low, change Color and can't run
     private void CountSlider()
     {
-        gazeSlider.value -= 0.001f;
-
+        gazeSlider.value -= gazeMinusSpeed;
         if (gazeSlider.value <= 0.5f)
         {
-            if (gazeSlider.value <= 0.3f)
-                SettingSliderColor(2);
             SettingSliderColor(1);
         }
         else
             SettingSliderColor(0);
 
-        // gazeSlider.value <=0 일 때 못뛰게 하기
         if (gazeSlider.value <= 0)
         {
-
+            isCantrun = true;
             return;
         }
-
-
-        
     }
-
 
     // Change Slider Color with Values
     private void SettingSliderColor(int _num)
