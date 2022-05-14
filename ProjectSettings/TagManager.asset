@@ -8,8 +8,7 @@ TagManager:
   - Map
   - Switch
   - TaurusObj
-  - StarPoint
-  - StarClear
+  - PuzzleCube
   layers:
   - Default
   - TransparentFX
