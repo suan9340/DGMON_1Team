@@ -45,25 +45,31 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    // click 설정창 닫기
     public void OnClickSetQick()
     {
         isSettingChang = !isSettingChang;
+        settingChang.SetActive(false);
 
         SetGameState(GameState.isPlaying);
         bigSetChang.transform.DOScaleY(0f, 0.15f).SetUpdate(true);
     }
 
+    // click 닫기
     public void OnClickReallySetOut()
     {
         settingChang.SetActive(false);
         SettingChangSet();
     }
+
+    // click 설정
     public void OnClickOption()
     {
         settingMenuChang.SetActive(false);
         settingChang.SetActive(true);
     }
 
+    // click 게임종료
     public void OnClickQuit()
     {
         Debug.Log("게임 종료");
