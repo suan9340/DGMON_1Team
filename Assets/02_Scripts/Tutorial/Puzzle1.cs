@@ -10,7 +10,7 @@ public class Puzzle1 : MonoBehaviour
     public List<Color> mycolors = new List<Color>();
     public List<GameObject> puzzleObj = new List<GameObject>();
 
-    int num = 0;
+    int num = 0, lastnum = 0;
     int clear = 0;
 
     public Color clearColor;
@@ -30,22 +30,20 @@ public class Puzzle1 : MonoBehaviour
             num = Random.Range(0, 4);
 
             if (collision.gameObject.GetComponent<Renderer>().material.color == mycolors[1]) return;
-            if (collision.gameObject.GetComponent<Renderer>().material.color == mycolors[num])
-            {
-                num = Random.Range(0, 4);
-            }
+            if (lastnum == num) num = Random.Range(0, 4);
 
             if (num == 1)
+            {
+                GameManager.Instance.Sound.clearLevel.Play();
                 clear++;
+            }
 
             collision.gameObject.GetComponent<Renderer>().material.color = mycolors[num];
-
-            Debug.Log(clear);
-
+            lastnum = num;
             if (clear == 5)
             {
-                Debug.Log("dfsfsd");
-                puzzleClearDoor.transform.DOMoveY(22, 1f);
+                GameManager.Instance.Sound.completeSond.Play();
+                puzzleClearDoor.transform.DOMoveY(22, 1.5f);
                 cleareffect.Play();
             }
         }
