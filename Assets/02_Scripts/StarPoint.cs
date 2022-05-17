@@ -10,8 +10,7 @@ public class StarPoint : MonoBehaviour
     public Text nestarPointTxt;
     [Header("모자란별빛조각")] public int nestarPoint;
 
-    public GameObject gameNonclear;
-    private bool gameNonClear = false;
+    public GameObject gameNonclearObj;
 
     public List<GameObject> foundObjects;
     public GameObject StageClear;
@@ -24,7 +23,6 @@ public class StarPoint : MonoBehaviour
     private float time;
 
     public GameObject starFirst;
-    private bool starfirst = false;
 
     void Update()
     {
@@ -58,43 +56,26 @@ public class StarPoint : MonoBehaviour
                 }
                 if (starPoint < 5)
                 {
+                    StartCoroutine(PrintNoneClear(true));
                     nestarPointTxt.text = "필요한 별 조각 : " + needStar + "개\n" + "별조각 " + nestarPoint + "개가 부족합니다";
-                    NonClear();
                 }
             }
-
         }
         if (shortDis >= 3.5)
         {
-            gameNonclear.SetActive(false);
-            gameNonClear = false;
+            if (gameNonclearObj.activeSelf == false) return;
+            gameNonclearObj.SetActive(false);
         }
-    }
-
-    void NonClear()
-    {
-        gameNonclear.SetActive(true);
-        gameNonClear = true;
     }
 
     void StarFirst()
     {
-        starFirst.SetActive(true);
-        starfirst = true;
-        //StarFirst Text timer
-        time = 5f;
-        if (time > 0)
-        {
-            time -= Time.deltaTime;
-        }
-        if (time <= 0)
-        {
-            starFirst.SetActive(false);
-        }
+        StartCoroutine(PrintImg());
     }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("StartPoint"))
+        if (other.gameObject.CompareTag("StarPoint"))
         {
             StarPoint starpoint = other.GetComponent<StarPoint>();
             starPoint++;
@@ -109,8 +90,24 @@ public class StarPoint : MonoBehaviour
         }
     }
 
+    private IEnumerator PrintNoneClear(bool isActicve)
+    {
+        gameNonclearObj.SetActive(isActicve);
+        yield return new WaitForSeconds(1f);
+        gameNonclearObj.SetActive(!isActicve);
+
+        yield return null;
+    }
     void StarPointText()
     {
         starPointTxt.text = "★ : " + starPoint;
+    }
+
+    private IEnumerator PrintImg()
+    {
+        starFirst.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        starFirst.SetActive(false);
+        yield return null;
     }
 }
