@@ -10,6 +10,7 @@ public class SoundManager : MonoBehaviour
     [Header("[[---EFFECT---]]")] public AudioSource clearLevel = null;
     public AudioSource jumpSound = null;
     public AudioSource completeSond = null;
+    public AudioSource getCoin = null;
 
     public void SetBGMSlider(float _volume)
     {
@@ -21,5 +22,6 @@ public class SoundManager : MonoBehaviour
         clearLevel.volume = _voulme;
         jumpSound.volume = _voulme;
         completeSond.volume = _voulme;
+        getCoin.volume = _voulme;
     }
 }

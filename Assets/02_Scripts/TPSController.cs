@@ -5,22 +5,22 @@ using UnityEngine.UI;
 
 public class TPSController : MonoBehaviour
 {
-    [Header("------À§Ä¡ °ª------")]
+    [Header("------ï¿½ï¿½Ä¡ ï¿½ï¿½------")]
     [SerializeField] private Transform characterBody;
     [SerializeField] private Transform cameraArm;
 
-    [Header("------¼öÄ¡µé------")]
-    [Header("ÀÌµ¿¼Óµµ")][Range(0f, 20f)] public float normalSpeed = 5f;
-    [Header("´Þ¸®±â¼Óµµ")][Range(0f, 20f)] public float runSpeed = 8f;
-    [Header("°È´Â¼Óµµ")][Range(0f, 20f)] public float walkSpeed = 8f;
-    [Header("°¨µµ")][Range(0f, 10f)] public float sensivity;
-    [Header("Á¡ÇÁ Èû")][Range(0f, 10f)] public float jumpPower = 2f;
+    [Header("------ï¿½ï¿½Ä¡ï¿½ï¿½------")]
+    [Header("ï¿½Ìµï¿½ï¿½Óµï¿½")][Range(0f, 20f)] public float normalSpeed = 5f;
+    [Header("ï¿½Þ¸ï¿½ï¿½ï¿½Óµï¿½")][Range(0f, 20f)] public float runSpeed = 8f;
+    [Header("ï¿½È´Â¼Óµï¿½")][Range(0f, 20f)] public float walkSpeed = 8f;
+    [Header("ï¿½ï¿½ï¿½ï¿½")][Range(0f, 10f)] public float sensivity;
+    [Header("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½")][Range(0f, 10f)] public float jumpPower = 2f;
 
-    [Header("------UI °ü·ÃµÈ------")]
+    [Header("------UI ï¿½ï¿½ï¿½Ãµï¿½------")]
     public Slider gazeSlider = null;
     [Range(0f, 0.5f)] public float gazeSpeed = 1f;
     [Range(0f, 0.5f)] public float gazeMinusSpeed = 1f;
-    [Header("°ÔÀÌÁö ½½¶óÀÌ´õ »ö»ó ¿ÀºêÁ¦")] public Image fillImage = null;
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")] public Image fillImage = null;
     public List<Color> fillColors = new List<Color>();
 
     private float speed;
