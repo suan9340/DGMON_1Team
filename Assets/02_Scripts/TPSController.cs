@@ -151,6 +151,7 @@ public class TPSController : MonoBehaviour
     // Plus Player Gaze(Setting GazeUI)
     private void SettingGazeSlider()
     {
+        if (gazeSlider == null) return;
         if (gazeSlider.value >= 1) return;
         gazeSlider.value += Time.deltaTime * gazeSpeed;
     }
@@ -178,7 +179,7 @@ public class TPSController : MonoBehaviour
         }
 
 
-        
+
     }
 
 
