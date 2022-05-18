@@ -43,7 +43,7 @@ public class StarPoint : MonoBehaviour
             }
             if (shortDis < 3.5 && Input.GetKeyDown(KeyCode.F))
             {
-                if (starPoint >= 5)
+                if (starPoint >= needStar)
                 {
                     starPoint += -needStar;
                     GetComponent<StarClear>().enabled = true;
@@ -51,7 +51,7 @@ public class StarPoint : MonoBehaviour
                     Debug.Log("스테이지 클리어");
                     break;
                 }
-                if (starPoint < 5)
+                if (starPoint < needStar)
                 {
                     StartCoroutine(PrintNoneClear(true));
                     nestarPointTxt.text = $"필요한 별 조각 : {needStar}개\n별조각 {nestarPoint}개가 부족합니다.";
@@ -85,13 +85,6 @@ public class StarPoint : MonoBehaviour
             StarFirst();
             StarPoint starFirst = other.GetComponent<StarPoint>();
             starPoint++;
-            Destroy(other.gameObject);
-        }
-        if (other.tag == "StarFirst")
-        {
-            StarPoint starFirst = other.GetComponent<StarPoint>();
-            starPoint++;
-            StarPointText();
             Destroy(other.gameObject);
         }
     }
