@@ -87,13 +87,13 @@ public class StarPoint : MonoBehaviour
             starPoint++;
             Destroy(other.gameObject);
         }
-        if (other.tag == "StarFirst")
-        {
-            StarPoint starFirst = other.GetComponent<StarPoint>();
-            starPoint++;
-            StarPointText();
-            Destroy(other.gameObject);
-        }
+        //if (other.tag == "StarFirst")
+        //{
+        //    StarPoint starFirst = other.GetComponent<StarPoint>();
+        //    starPoint++;
+        //    StarPointText();
+        //    Destroy(other.gameObject);
+        //}
     }
 
     private IEnumerator PrintNoneClear(bool isActicve)
@@ -113,7 +113,7 @@ public class StarPoint : MonoBehaviour
     {
         GameManager.Instance.SetGameState(GameState.isSetting);
         starFirstObj.SetActive(true);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.3f);
         GameManager.Instance.SetGameState(GameState.isPlaying);
         starFirstObj.SetActive(false);
         yield return null;
