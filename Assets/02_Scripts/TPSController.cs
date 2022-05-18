@@ -41,6 +41,8 @@ public class TPSController : MonoBehaviour
     {
         myrigid = GetComponent<Rigidbody>();
         myanim = GetComponentInChildren<Animator>();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void Update()
@@ -197,8 +199,4 @@ public class TPSController : MonoBehaviour
         fillImage.color = fillColors[_num];
     }
     // Setting GameManager GameState
-    public void SetGameState(GameState _state)
-    {
-        GameManager.Instance.gameState = _state;
-    }
 }

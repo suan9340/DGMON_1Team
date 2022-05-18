@@ -111,10 +111,10 @@ public class StarPoint : MonoBehaviour
 
     private IEnumerator PrintImg()
     {
-        GameManager.Instance.gameState = GameState.isSetting;
+        GameManager.Instance.SetGameState(GameState.isSetting);
         starFirstObj.SetActive(true);
         yield return new WaitForSeconds(2f);
-        GameManager.Instance.gameState = GameState.isPlaying;
+        GameManager.Instance.SetGameState(GameState.isPlaying);
         starFirstObj.SetActive(false);
         yield return null;
     }
