@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
     public GameState gameState;
 
     public SoundManager soundManager = null;
-    public SoundManager Sound { get { return soundManager; } }
+    public TuTorialManager tutoManager = null;
 
+    public SoundManager Sound { get { return soundManager; } }
+    public TuTorialManager Tutorial { get { return tutoManager; } }
 }

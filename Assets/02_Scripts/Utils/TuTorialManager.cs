@@ -1,25 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class TuTorialManager : MonoBehaviour
 {
-    public GameObject circleEffect = null;
-    [Header("튜토리얼 1단계")] public List<Transform> tutoTrn = new List<Transform>();
+    public List<bool> isDone = new List<bool>();
+    public GameObject puzzleClearDoor = null;
 
-    private Transform curretnTrn;
-
-    [SerializeField, Header("현재 튜토리얼 1단계 단계")]
-    private int num = 0;
-
-    private void Start()
+    public ParticleSystem cleareffect = null;
+    int cnt = 0;
+    public void CheckOpenDoor()
     {
-        ConnectPosition(num);
+        cnt = 0;
+        for (int i = 0; i < isDone.Count; i++)
+        {
+            if (isDone[i] == true)
+                cnt++;
+        }
+
+        if (cnt == isDone.Count)
+            MoveDoor();
+        else
+            Debug.Log(cnt);
     }
 
-    // 배열에 등록되 있는 값을 하나씩 현재 포지션에 연결해주는
-    private void ConnectPosition(int _num)
+    private void MoveDoor()
     {
-        circleEffect.transform.position = tutoTrn[_num].transform.position;
+        GameManager.Instance.Sound.completeSond.Play();
+        cleareffect.Play();
+        puzzleClearDoor.transform.DOMoveY(22, 3f);
     }
 }

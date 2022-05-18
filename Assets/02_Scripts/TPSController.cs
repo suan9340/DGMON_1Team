@@ -152,8 +152,6 @@ public class TPSController : MonoBehaviour
         }
 
         cameraArm.rotation = Quaternion.Euler(_x, _cameraAngle.y + _mouseDelta.x, _cameraAngle.z); ;
-
-
     }
 
 
