@@ -10,6 +10,8 @@ TagManager:
   - TaurusObj
   - StarPoint
   - StarClear
+  - PuzzleCube
+  - StarFirst
   layers:
   - Default
   - TransparentFX

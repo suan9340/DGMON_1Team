@@ -16,6 +16,13 @@ public class StarPoint : MonoBehaviour
             StarPointText();
             Destroy(other.gameObject);
         }
+        if (other.tag == "StarFirst")
+        {
+            StarPoint starFirst = other.GetComponent<StarPoint>();
+            starPoint++;
+            StarPointText();
+            Destroy(other.gameObject);
+        }
     }
 
     void StarPointText()
