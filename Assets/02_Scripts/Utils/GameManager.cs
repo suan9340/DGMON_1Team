@@ -28,9 +28,11 @@ public class GameManager : MonoBehaviour
 
     public SoundManager soundManager = null;
     public TuTorialManager tutoManager = null;
+    public UIManager uIManager = null;
 
     public SoundManager Sound { get { return soundManager; } }
     public TuTorialManager Tutorial { get { return tutoManager; } }
+    public UIManager UI { get { return uIManager; } }
 
     public void SetGameState(GameState _state)
     {

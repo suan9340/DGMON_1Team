@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
 
     [Tooltip("세부 설정창")] public GameObject settingChang = null;
     [Tooltip("큰 설정창")] public GameObject settingMenuChang = null;
+    [Tooltip("겜 끝")] public GameObject endGameChang = null;
 
     private bool isSettingChang = false;
 
@@ -76,4 +77,21 @@ public class UIManager : MonoBehaviour
         Application.Quit();
     }
 
+    public void EndGame()
+    {
+        GameManager.Instance.SetGameState(GameState.isSetting);
+        endGameChang.transform.DOScaleY(1f, 0.15f).SetUpdate(true);
+    }
+
+    public void OnClickEndGameStartScene()
+    {
+        SceneManager.LoadScene("StartScene");
+        GameManager.Instance.SetGameState(GameState.isStarting);
+    }
+
+    public void OnClickContinueGame()
+    {
+        GameManager.Instance.SetGameState(GameState.isPlaying);
+        endGameChang.transform.DOScaleY(0f, 0.15f).SetUpdate(true);
+    }
 }
