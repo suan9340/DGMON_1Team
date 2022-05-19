@@ -1,28 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 using UnityEngine.UI;
 
 public class StarPoint : MonoBehaviour
 {
     public Text starPointTxt;
-    [Header("모은별빛조각")] public int starPoint;
     public Text nestarPointTxt;
-    [Header("모자란별빛조각")] public int nestarPoint;
 
+    [Header("모은별빛조각")] public int starPoint;
+    [Header("모자란별빛조각")] public int nestarPoint;
+    [Header("필요한별빛조각")] public int needStar = 5;
     public GameObject gameNonclearObj;
 
     public List<GameObject> foundObjects;
     public GameObject StageClear;
     public string tagName;
     public float shortDis;
-    public GameObject StarClear;
-    [Header("필요한별빛조각")] public int needStar = 5;
 
-    public GameObject stageClear;
-    private float time;
-
-    public GameObject starFirst;
+    public GameObject starFirstObj;
 
     void Update()
     {
@@ -57,7 +54,7 @@ public class StarPoint : MonoBehaviour
                 if (starPoint < 5)
                 {
                     StartCoroutine(PrintNoneClear(true));
-                    nestarPointTxt.text = "필요한 별 조각 : " + needStar + "개\n" + "별조각 " + nestarPoint + "개가 부족합니다";
+                    nestarPointTxt.text = $"필요한 별 조각 : {needStar}개\n별조각 {nestarPoint}개가 부족합니다.";
                 }
             }
         }
@@ -77,15 +74,24 @@ public class StarPoint : MonoBehaviour
     {
         if (other.gameObject.CompareTag("StarPoint"))
         {
+            GameManager.Instance.Sound.getCoin.Play();
             StarPoint starpoint = other.GetComponent<StarPoint>();
             starPoint++;
             Destroy(other.gameObject);
         }
         if (other.gameObject.CompareTag("StarFirst"))
         {
+            GameManager.Instance.Sound.getCoin.Play();
             StarFirst();
             StarPoint starFirst = other.GetComponent<StarPoint>();
             starPoint++;
+            Destroy(other.gameObject);
+        }
+        if (other.tag == "StarFirst")
+        {
+            StarPoint starFirst = other.GetComponent<StarPoint>();
+            starPoint++;
+            StarPointText();
             Destroy(other.gameObject);
         }
     }
@@ -100,14 +106,16 @@ public class StarPoint : MonoBehaviour
     }
     void StarPointText()
     {
-        starPointTxt.text = "★ : " + starPoint;
+        starPointTxt.text = $"★ : {starPoint}";
     }
 
     private IEnumerator PrintImg()
     {
-        starFirst.SetActive(true);
+        GameManager.Instance.gameState = GameState.isSetting;
+        starFirstObj.SetActive(true);
         yield return new WaitForSeconds(2f);
-        starFirst.SetActive(false);
+        GameManager.Instance.gameState = GameState.isPlaying;
+        starFirstObj.SetActive(false);
         yield return null;
     }
 }

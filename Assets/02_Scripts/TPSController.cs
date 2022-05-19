@@ -5,21 +5,22 @@ using UnityEngine.UI;
 
 public class TPSController : MonoBehaviour
 {
-    [Header("------À§Ä¡ °ª------")]
+    [Header("------ï¿½ï¿½Ä¡ ï¿½ï¿½------")]
     [SerializeField] private Transform characterBody;
     [SerializeField] private Transform cameraArm;
 
-    [Header("------¼öÄ¡µé------")]
-    [Header("ÀÌµ¿¼Óµµ")][Range(0f, 20f)] public float normalSpeed = 5f;
-    [Header("´Þ¸®±â¼Óµµ")][Range(0f, 20f)] public float runSpeed = 8f;
-    [Header("°È´Â¼Óµµ")][Range(0f, 20f)] public float walkSpeed = 8f;
-    [Header("°¨µµ")][Range(0f, 10f)] public float sensivity;
-    [Header("Á¡ÇÁ Èû")][Range(0f, 10f)] public float jumpPower = 2f;
+    [Header("------ï¿½ï¿½Ä¡ï¿½ï¿½------")]
+    [Header("ï¿½Ìµï¿½ï¿½Óµï¿½")][Range(0f, 20f)] public float normalSpeed = 5f;
+    [Header("ï¿½Þ¸ï¿½ï¿½ï¿½Óµï¿½")][Range(0f, 20f)] public float runSpeed = 8f;
+    [Header("ï¿½È´Â¼Óµï¿½")][Range(0f, 20f)] public float walkSpeed = 8f;
+    [Header("ï¿½ï¿½ï¿½ï¿½")][Range(0f, 10f)] public float sensivity;
+    [Header("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½")][Range(0f, 10f)] public float jumpPower = 2f;
 
-    [Header("------UI °ü·ÃµÈ------")]
+    [Header("------UI ï¿½ï¿½ï¿½Ãµï¿½------")]
     public Slider gazeSlider = null;
-    [Range(0f, 1f)] public float gazeSpeed = 2f;
-    [Header("°ÔÀÌÁö ½½¶óÀÌ´õ »ö»ó ¿ÀºêÁ¦")] public Image fillImage = null;
+    [Range(0f, 0.5f)] public float gazeSpeed = 1f;
+    [Range(0f, 0.5f)] public float gazeMinusSpeed = 1f;
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")] public Image fillImage = null;
     public List<Color> fillColors = new List<Color>();
 
     private float speed;
@@ -28,6 +29,8 @@ public class TPSController : MonoBehaviour
     private bool isWalk;
     private bool jDown;
     private bool isJump;
+
+    private bool isCantrun;
 
     Vector3 moveDir = Vector3.zero;
 
@@ -82,6 +85,11 @@ public class TPSController : MonoBehaviour
 
         myanim.SetBool("isWalk", isMove);
         myanim.SetBool("isSlowWalk", isWalk);
+        if (isCantrun)
+        {
+            myanim.SetBool("isRun", false);
+            return;
+        }
         myanim.SetBool("isRun", isRun);
     }
 
@@ -89,10 +97,10 @@ public class TPSController : MonoBehaviour
     // run, walk, slow walk ... Control Player Speed
     private void SpeedControl()
     {
-        if (isRun)
+        if (isRun && isCantrun == false)
         {
-            CountSlider();
             speed = runSpeed;
+            CountSlider();
         }
         else if (isWalk)
             speed = walkSpeed;
@@ -107,6 +115,7 @@ public class TPSController : MonoBehaviour
         jDown = Input.GetButtonDown("Jump");
         if (jDown && !isJump)
         {
+            GameManager.Instance.Sound.jumpSound.Play();
             myrigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
             myanim.SetBool("isJump", true);
             myanim.SetTrigger("doJump");
@@ -151,37 +160,38 @@ public class TPSController : MonoBehaviour
     // Plus Player Gaze(Setting GazeUI)
     private void SettingGazeSlider()
     {
-        if (gazeSlider == null) return;
+        if (isCantrun)
+        {
+            SettingSliderColor(2);
+            if (gazeSlider.value >= 1)
+            {
+                SettingSliderColor(0);
+                isCantrun = false;
+            }
+        }
+
         if (gazeSlider.value >= 1) return;
+
         gazeSlider.value += Time.deltaTime * gazeSpeed;
     }
-
 
     // if PlayerSlider is low, change Color and can't run
     private void CountSlider()
     {
-        gazeSlider.value -= 0.001f;
-
+        gazeSlider.value -= gazeMinusSpeed;
         if (gazeSlider.value <= 0.5f)
         {
-            if (gazeSlider.value <= 0.3f)
-                SettingSliderColor(2);
             SettingSliderColor(1);
         }
         else
             SettingSliderColor(0);
 
-        // gazeSlider.value <=0 ÀÏ ¶§ ¸ø¶Ù°Ô ÇÏ±â
         if (gazeSlider.value <= 0)
         {
-
+            isCantrun = true;
             return;
         }
-
-
-
     }
-
 
     // Change Slider Color with Values
     private void SettingSliderColor(int _num)
