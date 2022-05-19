@@ -21,8 +21,6 @@ public class TuTorialManager : MonoBehaviour
 
         if (cnt == isDone.Count)
             MoveDoor();
-        else
-            Debug.Log(cnt);
     }
 
     private void MoveDoor()
