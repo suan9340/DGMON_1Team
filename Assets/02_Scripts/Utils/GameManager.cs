@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     public void SetGameState(GameState _state)
     {
         gameState = _state;
-        if (gameState == GameState.isSetting)
+        if (gameState == GameState.isSetting || gameState == GameState.isStarting)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;

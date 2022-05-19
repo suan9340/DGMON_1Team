@@ -48,13 +48,13 @@ public class StarPoint : MonoBehaviour
                     starPoint += -needStar;
                     GetComponent<StarClear>().enabled = true;
                     Destroy(StageClear);
-                    Debug.Log("�������� Ŭ����");
+                    Debug.Log("스테이지 클리어");
                     break;
                 }
                 if (starPoint < needStar)
                 {
                     StartCoroutine(PrintNoneClear(true));
-                    nestarPointTxt.text = $"�ʿ��� �� ���� : {needStar}��\n������ {nestarPoint}���� �����մϴ�.";
+                    nestarPointTxt.text = $"필요한 별 조각 : {needStar}개\n별조각 {nestarPoint}개가 부족합니다.";
                 }
             }
         }
