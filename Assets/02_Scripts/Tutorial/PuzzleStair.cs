@@ -10,6 +10,8 @@ public class PuzzleStair : MonoBehaviour
     public List<Color> mycolors = new List<Color>();
     private Material material;
 
+    public ParticleSystem stairEffect = null;
+
     private void Start()
     {
         material = GetComponent<Renderer>().material;
@@ -39,6 +41,7 @@ public class PuzzleStair : MonoBehaviour
         if (num == 2)
         {
             CheckStairNum(true);
+            stairEffect.Play();
             GameManager.Instance.Sound.clearLevel.Play();
         }
         else
