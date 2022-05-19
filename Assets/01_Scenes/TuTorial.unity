@@ -15532,7 +15532,7 @@ MonoBehaviour:
   jumpPower: 6
   gazeSlider: {fileID: 913249430}
   gazeSpeed: 0.08
-  gazeMinusSpeed: 0.0008
+  gazeMinusSpeed: 0.0006
   fillImage: {fileID: 1498315379}
   fillColors:
   - {r: 0, g: 1, b: 0, a: 1}
