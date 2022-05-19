@@ -21,6 +21,7 @@ public class StarPoint : MonoBehaviour
 
     public GameObject starFirstObj;
 
+    public GameObject a = null;
     void Update()
     {
         nestarPoint = needStar - starPoint;
@@ -43,6 +44,8 @@ public class StarPoint : MonoBehaviour
             }
             if (shortDis < 3.5 && Input.GetKeyDown(KeyCode.F))
             {
+                if (a.gameObject.activeSelf) return;
+                a.SetActive(true);
                 if (starPoint >= needStar)
                 {
                     starPoint += -needStar;
@@ -59,6 +62,11 @@ public class StarPoint : MonoBehaviour
                     StartCoroutine(PrintNoneClear(true));
                     nestarPointTxt.text = $"필요한 별 조각 : {needStar}개\n별조각 {nestarPoint}개가 부족합니다.";
                 }
+            }
+            else if (shortDis > 3.5)
+            {
+                if (a.gameObject.activeSelf == false) return;
+                a.SetActive(false);
             }
         }
         if (shortDis >= 3.5)
