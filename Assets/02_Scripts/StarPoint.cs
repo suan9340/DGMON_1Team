@@ -9,9 +9,9 @@ public class StarPoint : MonoBehaviour
     public Text starPointTxt;
     public Text nestarPointTxt;
 
-    [Header("¸ðÀºº°ºûÁ¶°¢")] public int starPoint;
-    [Header("¸ðÀÚ¶õº°ºûÁ¶°¢")] public int nestarPoint;
-    [Header("ÇÊ¿äÇÑº°ºûÁ¶°¢")] public int needStar = 5;
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")] public int starPoint;
+    [Header("ï¿½ï¿½ï¿½Ú¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")] public int nestarPoint;
+    [Header("ï¿½Ê¿ï¿½ï¿½Ñºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")] public int needStar = 5;
     public GameObject gameNonclearObj;
 
     public List<GameObject> foundObjects;
@@ -43,18 +43,18 @@ public class StarPoint : MonoBehaviour
             }
             if (shortDis < 3.5 && Input.GetKeyDown(KeyCode.F))
             {
-                if (starPoint >= 5)
+                if (starPoint >= needStar)
                 {
                     starPoint += -needStar;
                     GetComponent<StarClear>().enabled = true;
                     Destroy(StageClear);
-                    Debug.Log("½ºÅ×ÀÌÁö Å¬¸®¾î");
+                    Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½");
                     break;
                 }
-                if (starPoint < 5)
+                if (starPoint < needStar)
                 {
                     StartCoroutine(PrintNoneClear(true));
-                    nestarPointTxt.text = $"ÇÊ¿äÇÑ º° Á¶°¢ : {needStar}°³\nº°Á¶°¢ {nestarPoint}°³°¡ ºÎÁ·ÇÕ´Ï´Ù.";
+                    nestarPointTxt.text = $"ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ : {needStar}ï¿½ï¿½\nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ {nestarPoint}ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.";
                 }
             }
         }
@@ -106,7 +106,7 @@ public class StarPoint : MonoBehaviour
     }
     void StarPointText()
     {
-        starPointTxt.text = $"¡Ú : {starPoint}";
+        starPointTxt.text = $"â˜… : {starPoint}";
     }
 
     private IEnumerator PrintImg()
