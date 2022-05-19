@@ -37,23 +37,27 @@ public class MainManu : MonoBehaviour
 
     public void OnClickNoQuit()
     {
+        gameQuitObj.gameObject.SetActive(false);
         gameQuitObj.transform.DOScaleY(0f, 0.15f).SetUpdate(true);
         isOutGame = false;
     }
 
     public void OnClickQuitGame()
     {
+        gameQuitObj.gameObject.SetActive(true);
         gameQuitObj.transform.DOScaleY(1f, 0.15f).SetUpdate(true);
         isOutGame = true;
     }
     public void OnClickSetting()
     {
+        SetChangObj.gameObject.SetActive(true);
         isSetting = true;
         SetChangObj.transform.DOScaleY(1f, 0.15f).SetUpdate(true);
     }
 
     public void OnClickQuitSetting()
     {
+        SetChangObj.gameObject.SetActive(false);
         isSetting = false;
         SetChangObj.transform.DOScaleY(0f, 0.15f).SetUpdate(true);
     }

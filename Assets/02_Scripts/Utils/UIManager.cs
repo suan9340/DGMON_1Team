@@ -34,6 +34,7 @@ public class UIManager : MonoBehaviour
             Time.timeScale = 1f;
 
             GameManager.Instance.SetGameState(GameState.isPlaying);
+            bigSetChang.gameObject.SetActive(false);
             bigSetChang.transform.DOScaleY(0f, 0.15f).SetUpdate(true);
         }
         else
@@ -41,6 +42,7 @@ public class UIManager : MonoBehaviour
             settingMenuChang.SetActive(true);
             Time.timeScale = 0f;
 
+            bigSetChang.gameObject.SetActive(true);
             GameManager.Instance.SetGameState(GameState.isSetting);
             bigSetChang.transform.DOScaleY(1f, 0.15f).SetUpdate(true);
         }
@@ -81,6 +83,7 @@ public class UIManager : MonoBehaviour
     public void EndGame()
     {
         GameManager.Instance.SetGameState(GameState.isSetting);
+        endGameChang.gameObject.SetActive(true);
         endGameChang.transform.DOScaleY(1f, 0.15f).SetUpdate(true);
     }
 
@@ -93,6 +96,7 @@ public class UIManager : MonoBehaviour
     public void OnClickContinueGame()
     {
         GameManager.Instance.SetGameState(GameState.isPlaying);
+        endGameChang.gameObject.SetActive(false);
         endGameChang.transform.DOScaleY(0f, 0.15f).SetUpdate(true);
     }
 }
