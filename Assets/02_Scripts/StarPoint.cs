@@ -50,8 +50,6 @@ public class StarPoint : MonoBehaviour
                     Destroy(StageClear);
                     Debug.Log("스테이지 클리어");
                     GameManager.Instance.UI.EndGame();
-
-                    StopAllCoroutines();
                     break;
                 }
                 if (starPoint < needStar)

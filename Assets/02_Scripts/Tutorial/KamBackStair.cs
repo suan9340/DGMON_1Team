@@ -7,12 +7,12 @@ public class KamBackStair : MonoBehaviour
     public List<GameObject> stair = new List<GameObject>();
 
     int num = 0;
-    public static readonly WaitForSeconds stairspeed = new WaitForSeconds(0.8f);
+    public static readonly WaitForSeconds stairspeed = new WaitForSeconds(0.6f);
 
     private void Start()
     {
-        //StartCoroutine(KamBack());
-        //Debug.Log(stair.Count);
+        StartCoroutine(KamBack());
+        Debug.Log(stair.Count);
     }
 
 
@@ -22,9 +22,8 @@ public class KamBackStair : MonoBehaviour
         while (true)
         {
             s = stair[num];
-            Debug.Log(num);
 
-            if (num > stair.Count)
+            if (num >= 9)
                 num = 0;
             else
                 num++;

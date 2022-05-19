@@ -1637,6 +1637,11 @@ MonoBehaviour:
     m_MaintainAim: 1
   m_SourceObjectsGUIToggle: 1
   m_SettingsGUIToggle: 1
+--- !u!1 &185557315 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4098970845198391628, guid: 0ff1dcfb62b94c241886c3842a7d1295, type: 3}
+  m_PrefabInstance: {fileID: 1768238947}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &190102330 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1731178185962991309, guid: a9188a11366d5e74a876630f8b82dbec, type: 3}
@@ -20814,7 +20819,7 @@ MonoBehaviour:
   - {fileID: 1978646890}
   - {fileID: 589301788}
   - {fileID: 1415340703}
-  - {fileID: 1415340703}
+  - {fileID: 185557315}
 --- !u!1001 &1664246440
 PrefabInstance:
   m_ObjectHideFlags: 0
