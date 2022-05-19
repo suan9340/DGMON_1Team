@@ -53,10 +53,10 @@ public class StarPoint : MonoBehaviour
                 if (starPoint >= needStar)
                 {
                     starPoint += -needStar;
-                    //GetComponent<StarClear>().enabled = true;
+                    GetComponent<StarClear>().enabled = true;
                     Destroy(StageClear);
                     Debug.Log("스테이지 클리어");
-                    //GameManager.Instance.UI.EndGame();
+                    GameManager.Instance.UI.EndGame();
 
                     StopAllCoroutines();
                     break;
