@@ -12,7 +12,6 @@ public class KamBackStair : MonoBehaviour
     private void Start()
     {
         StartCoroutine(KamBack());
-        Debug.Log(stair.Count);
     }
 
 
