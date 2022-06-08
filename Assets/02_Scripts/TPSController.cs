@@ -160,6 +160,7 @@ public class TPSController : MonoBehaviour
     // Plus Player Gaze(Setting GazeUI)
     private void SettingGazeSlider()
     {
+        if (isRun) return;
         if (isCantrun)
         {
             SettingSliderColor(2);

@@ -27,6 +27,7 @@ public class MainManu : MonoBehaviour
 
     public void OnClickStartGame()
     {
+        GameManager.Instance.SetGameState(GameState.isPlaying);
         SceneManager.LoadScene("TuTorial");
     }
 
