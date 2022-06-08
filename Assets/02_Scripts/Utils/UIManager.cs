@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
 
     [Tooltip("세부 설정창")] public GameObject settingChang = null;
     [Tooltip("큰 설정창")] public GameObject settingMenuChang = null;
+    [Tooltip("겜 끝")] public GameObject endGameChang = null;
 
     private bool isSettingChang = false;
 
@@ -32,7 +33,8 @@ public class UIManager : MonoBehaviour
             settingChang.SetActive(false);
             Time.timeScale = 1f;
 
-            SetGameState(GameState.isPlaying);
+            GameManager.Instance.SetGameState(GameState.isPlaying);
+            bigSetChang.gameObject.SetActive(false);
             bigSetChang.transform.DOScaleY(0f, 0.15f).SetUpdate(true);
         }
         else
@@ -40,7 +42,8 @@ public class UIManager : MonoBehaviour
             settingMenuChang.SetActive(true);
             Time.timeScale = 0f;
 
-            SetGameState(GameState.isSetting);
+            bigSetChang.gameObject.SetActive(true);
+            GameManager.Instance.SetGameState(GameState.isSetting);
             bigSetChang.transform.DOScaleY(1f, 0.15f).SetUpdate(true);
         }
     }
@@ -48,11 +51,12 @@ public class UIManager : MonoBehaviour
     // click 설정창 닫기
     public void OnClickSetQick()
     {
-        isSettingChang = !isSettingChang;
-        settingChang.SetActive(false);
+        //isSettingChang = !isSettingChang;
+        //settingChang.SetActive(false);
 
-        SetGameState(GameState.isPlaying);
-        bigSetChang.transform.DOScaleY(0f, 0.15f).SetUpdate(true);
+        //GameManager.Instance.SetGameState(GameState.isPlaying);
+        //bigSetChang.transform.DOScaleY(0f, 0.15f).SetUpdate(true);
+        SettingChangSet();
     }
 
     // click 닫기
@@ -76,9 +80,23 @@ public class UIManager : MonoBehaviour
         Application.Quit();
     }
 
-
-    public void SetGameState(GameState _state)
+    public void EndGame()
     {
-        GameManager.Instance.gameState = _state;
+        GameManager.Instance.SetGameState(GameState.isSetting);
+        endGameChang.gameObject.SetActive(true);
+        endGameChang.transform.DOScaleY(1f, 0.15f).SetUpdate(true);
+    }
+
+    public void OnClickEndGameStartScene()
+    {
+        SceneManager.LoadScene("StartScene");
+        GameManager.Instance.SetGameState(GameState.isStarting);
+    }
+
+    public void OnClickContinueGame()
+    {
+        GameManager.Instance.SetGameState(GameState.isPlaying);
+        endGameChang.gameObject.SetActive(false);
+        endGameChang.transform.DOScaleY(0f, 0.15f).SetUpdate(true);
     }
 }

@@ -12,6 +12,7 @@ TagManager:
   - StarClear
   - PuzzleCube
   - StarFirst
+  - Guide
   layers:
   - Default
   - TransparentFX

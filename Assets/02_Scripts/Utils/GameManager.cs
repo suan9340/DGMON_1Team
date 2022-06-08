@@ -27,6 +27,26 @@ public class GameManager : MonoBehaviour
     public GameState gameState;
 
     public SoundManager soundManager = null;
-    public SoundManager Sound { get { return soundManager; } }
+    public TuTorialManager tutoManager = null;
+    public UIManager uIManager = null;
 
+    public SoundManager Sound { get { return soundManager; } }
+    public TuTorialManager Tutorial { get { return tutoManager; } }
+    public UIManager UI { get { return uIManager; } }
+
+    public void SetGameState(GameState _state)
+    {
+        gameState = _state;
+        if (gameState == GameState.isSetting || gameState == GameState.isStarting)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else if (gameState == GameState.isPlaying)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+
+    }
 }

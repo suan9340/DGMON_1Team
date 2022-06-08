@@ -9,9 +9,9 @@ public class StarPoint : MonoBehaviour
     public Text starPointTxt;
     public Text nestarPointTxt;
 
-    [Header("¸ğÀºº°ºûÁ¶°¢")] public int starPoint;
-    [Header("¸ğÀÚ¶õº°ºûÁ¶°¢")] public int nestarPoint;
-    [Header("ÇÊ¿äÇÑº°ºûÁ¶°¢")] public int needStar = 5;
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")] public int starPoint;
+    [Header("ï¿½ï¿½ï¿½Ú¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")] public int nestarPoint;
+    [Header("ï¿½Ê¿ï¿½ï¿½Ñºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")] public int needStar = 5;
     public GameObject gameNonclearObj;
 
     public List<GameObject> foundObjects;
@@ -21,8 +21,15 @@ public class StarPoint : MonoBehaviour
 
     public GameObject starFirstObj;
 
+    public GameObject starGuide2;
+
+
     void Update()
     {
+        if (starPoint >= needStar)
+        {
+            starGuide2.SetActive(true);
+        }
         nestarPoint = needStar - starPoint;
 
         StarPointText();
@@ -43,18 +50,21 @@ public class StarPoint : MonoBehaviour
             }
             if (shortDis < 3.5 && Input.GetKeyDown(KeyCode.F))
             {
-                if (starPoint >= 5)
+                if (starPoint >= needStar)
                 {
                     starPoint += -needStar;
                     GetComponent<StarClear>().enabled = true;
                     Destroy(StageClear);
-                    Debug.Log("½ºÅ×ÀÌÁö Å¬¸®¾î");
+                    Debug.Log("ìŠ¤í…Œì´ì§€ í´ë¦¬ì–´");
+                    GameManager.Instance.UI.EndGame();
+
+                    StopAllCoroutines();
                     break;
                 }
-                if (starPoint < 5)
+                if (starPoint < needStar)
                 {
                     StartCoroutine(PrintNoneClear(true));
-                    nestarPointTxt.text = $"ÇÊ¿äÇÑ º° Á¶°¢ : {needStar}°³\nº°Á¶°¢ {nestarPoint}°³°¡ ºÎÁ·ÇÕ´Ï´Ù.";
+                    nestarPointTxt.text = $"í•„ìš”í•œ ë³„ ì¡°ê° : {needStar}ê°œ\në³„ì¡°ê° {nestarPoint}ê°œê°€ ë¶€ì¡±í•©ë‹ˆë‹¤.";
                 }
             }
         }
@@ -87,13 +97,13 @@ public class StarPoint : MonoBehaviour
             starPoint++;
             Destroy(other.gameObject);
         }
-        if (other.tag == "StarFirst")
-        {
-            StarPoint starFirst = other.GetComponent<StarPoint>();
-            starPoint++;
-            StarPointText();
-            Destroy(other.gameObject);
-        }
+        //if (other.tag == "StarFirst")
+        //{
+        //    StarPoint starFirst = other.GetComponent<StarPoint>();
+        //    starPoint++;
+        //    StarPointText();
+        //    Destroy(other.gameObject);
+        //}
     }
 
     private IEnumerator PrintNoneClear(bool isActicve)
@@ -106,15 +116,15 @@ public class StarPoint : MonoBehaviour
     }
     void StarPointText()
     {
-        starPointTxt.text = $"¡Ú : {starPoint}";
+        starPointTxt.text = $"â˜… : {starPoint}";
     }
 
     private IEnumerator PrintImg()
     {
-        GameManager.Instance.gameState = GameState.isSetting;
+        GameManager.Instance.SetGameState(GameState.isSetting);
         starFirstObj.SetActive(true);
-        yield return new WaitForSeconds(2f);
-        GameManager.Instance.gameState = GameState.isPlaying;
+        yield return new WaitForSeconds(1.3f);
+        GameManager.Instance.SetGameState(GameState.isPlaying);
         starFirstObj.SetActive(false);
         yield return null;
     }
