@@ -51,11 +51,6 @@ public class UIManager : MonoBehaviour
     // click ¼³Á¤Ã¢ ´Ý±â
     public void OnClickSetQick()
     {
-        //isSettingChang = !isSettingChang;
-        //settingChang.SetActive(false);
-
-        //GameManager.Instance.SetGameState(GameState.isPlaying);
-        //bigSetChang.transform.DOScaleY(0f, 0.15f).SetUpdate(true);
         SettingChangSet();
     }
 
