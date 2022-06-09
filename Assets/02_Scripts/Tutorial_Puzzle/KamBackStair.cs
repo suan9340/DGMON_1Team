@@ -14,7 +14,6 @@ public class KamBackStair : MonoBehaviour
         StartCoroutine(KamBack());
     }
 
-
     private IEnumerator KamBack()
     {
         GameObject s = null;
@@ -32,10 +31,5 @@ public class KamBackStair : MonoBehaviour
             s.SetActive(true);
             yield return stairspeed;
         }
-    }
-
-    private void SetNum(GameObject s)
-    {
-
     }
 }

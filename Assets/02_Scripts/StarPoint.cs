@@ -9,9 +9,9 @@ public class StarPoint : MonoBehaviour
     public Text starPointTxt;
     public Text nestarPointTxt;
 
-    [Header("������������")] public int starPoint;
-    [Header("���ڶ���������")] public int nestarPoint;
-    [Header("�ʿ��Ѻ�������")] public int needStar = 5;
+    public int starPoint;
+    public int nestarPoint;
+    public int needStar = 5;
     public GameObject gameNonclearObj;
 
     public List<GameObject> foundObjects;
@@ -55,7 +55,6 @@ public class StarPoint : MonoBehaviour
                     starPoint += -needStar;
                     GetComponent<StarClear>().enabled = true;
                     Destroy(StageClear);
-                    Debug.Log("스테이지 클리어");
                     GameManager.Instance.UI.EndGame();
 
                     StopAllCoroutines();
@@ -64,7 +63,7 @@ public class StarPoint : MonoBehaviour
                 if (starPoint < needStar)
                 {
                     StartCoroutine(PrintNoneClear(true));
-                    nestarPointTxt.text = $"필요한 별 조각 : {needStar}개\n별조각 {nestarPoint}개가 부족합니다.";
+                    nestarPointTxt.text = $"?�요??�?조각 : {needStar}�?n별조�?{nestarPoint}개�? 부족합?�다.";
                 }
             }
         }
@@ -116,7 +115,7 @@ public class StarPoint : MonoBehaviour
     }
     void StarPointText()
     {
-        starPointTxt.text = $"★ : {starPoint}";
+        starPointTxt.text = $"??: {starPoint}";
     }
 
     private IEnumerator PrintImg()
