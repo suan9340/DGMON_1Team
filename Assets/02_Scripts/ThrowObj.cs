@@ -23,9 +23,6 @@ public class ThrowObj : MonoBehaviour
     RaycastHit hit;
     Rigidbody bomrgid;
 
-    private void Start()
-    {
-    }
     private void Update()
     {
         InputKey();
@@ -78,7 +75,4 @@ public class ThrowObj : MonoBehaviour
             }
         }
     }
-
-
-    
 }

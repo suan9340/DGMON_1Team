@@ -5,22 +5,22 @@ using UnityEngine.UI;
 
 public class TPSController : MonoBehaviour
 {
-    [Header("------��ġ ��------")]
+    [Header("------Transform------")]
     [SerializeField] private Transform characterBody;
     [SerializeField] private Transform cameraArm;
 
-    [Header("------��ġ��------")]
-    [Header("�̵��ӵ�")][Range(0f, 20f)] public float normalSpeed = 5f;
-    [Header("�޸���ӵ�")][Range(0f, 20f)] public float runSpeed = 8f;
-    [Header("�ȴ¼ӵ�")][Range(0f, 20f)] public float walkSpeed = 8f;
-    [Header("����")][Range(0f, 10f)] public float sensivity;
-    [Header("���� ��")][Range(0f, 10f)] public float jumpPower = 2f;
+    [Header("------PlayerData------")]
+    [Range(0f, 20f)] public float normalSpeed = 5f;
+    [Range(0f, 20f)] public float runSpeed = 8f;
+    [Range(0f, 20f)] public float walkSpeed = 8f;
+    [Range(0f, 10f)] public float sensivity;
+    [Range(0f, 10f)] public float jumpPower = 2f;
 
-    [Header("------UI ���õ�------")]
+    [Header("------UI Data------")]
     public Slider gazeSlider = null;
     [Range(0f, 0.5f)] public float gazeSpeed = 1f;
     [Range(0f, 0.5f)] public float gazeMinusSpeed = 1f;
-    [Header("������ �����̴� ���� ������")] public Image fillImage = null;
+    public Image fillImage = null;
     public List<Color> fillColors = new List<Color>();
 
     private float speed;
