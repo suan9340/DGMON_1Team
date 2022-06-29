@@ -115,6 +115,7 @@ public class StarPoint : MonoBehaviour
     }
     void StarPointText()
     {
+        if (starPointTxt == null) return;
         starPointTxt.text = $"??: {starPoint}";
     }
 

@@ -171,6 +171,7 @@ public class TPSController : MonoBehaviour
             }
         }
 
+        if (gazeSlider == null) return;
         if (gazeSlider.value >= 1) return;
 
         gazeSlider.value += Time.deltaTime * gazeSpeed;
