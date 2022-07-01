@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94a663f14f315364481ec2d896481d49, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  sensivity: 0
+  sensivity: 5
+  normalSpeed: 8
+  runSpeed: 10
+  jumpPower: 2
+  walkSpeed: 4

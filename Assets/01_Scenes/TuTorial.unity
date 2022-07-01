@@ -15107,7 +15107,7 @@ MonoBehaviour:
   runSpeed: 10
   walkSpeed: 4
   sensivity: 4.7
-  jumpPower: 10
+  jumpPower: 1.97
   gazeSlider: {fileID: 913249430}
   gazeSpeed: 0.08
   gazeMinusSpeed: 0.0006

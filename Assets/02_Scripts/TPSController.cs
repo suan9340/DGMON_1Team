@@ -10,11 +10,7 @@ public class TPSController : MonoBehaviour
     [SerializeField] private Transform cameraArm;
 
     [Header("------PlayerData------")]
-    [Range(0f, 20f)] public float normalSpeed = 5f;
-    [Range(0f, 20f)] public float runSpeed = 8f;
-    [Range(0f, 20f)] public float walkSpeed = 8f;
-    [Range(0f, 10f)] public float sensivity;
-    [Range(0f, 10f)] public float jumpPower = 2f;
+    [SerializeField] private PlayerData playerData;
 
     [Header("------UI Data------")]
     public Slider gazeSlider = null;
@@ -39,11 +35,15 @@ public class TPSController : MonoBehaviour
 
     private void Awake()
     {
+        ConnectData();
+
         myrigid = GetComponent<Rigidbody>();
         myanim = GetComponentInChildren<Animator>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
+
+
 
     private void Update()
     {
@@ -51,6 +51,13 @@ public class TPSController : MonoBehaviour
         if (GameManager.Instance.gameState == GameState.isSetting)
             return;
         PlayGameSet();
+    }
+
+    public void ConnectData()
+    {
+        const string SAVE_PATH = "SO/";
+        playerData = Resources.Load<PlayerData>(SAVE_PATH + "PlayerData");
+
     }
 
     // GameSetting
@@ -101,13 +108,13 @@ public class TPSController : MonoBehaviour
     {
         if (isRun && isCantrun == false)
         {
-            speed = runSpeed;
+            speed = playerData.runSpeed;
             CountSlider();
         }
         else if (isWalk)
-            speed = walkSpeed;
+            speed = playerData.walkSpeed;
         else
-            speed = normalSpeed;
+            speed = playerData.normalSpeed;
     }
 
 
@@ -118,7 +125,7 @@ public class TPSController : MonoBehaviour
         if (jDown && !isJump)
         {
             GameManager.Instance.Sound.jumpSound.Play();
-            myrigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+            myrigid.AddForce(Vector3.up * playerData.jumpPower, ForceMode.Impulse);
             myanim.SetBool("isJump", true);
             myanim.SetTrigger("doJump");
             isJump = true;
@@ -140,7 +147,7 @@ public class TPSController : MonoBehaviour
     // Input User MousePosition and rotate Camera 
     private void LookAround()
     {
-        Vector2 _mouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")) * sensivity;
+        Vector2 _mouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")) * playerData.sensivity;
         Vector3 _cameraAngle = cameraArm.rotation.eulerAngles;
         float _x = _cameraAngle.x - _mouseDelta.y;
 
