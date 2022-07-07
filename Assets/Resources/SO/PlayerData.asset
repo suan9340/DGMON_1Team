@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   sensivity: 5
-  normalSpeed: 8
-  runSpeed: 10
+  normalSpeed: 7
+  runSpeed: 9
   jumpPower: 7
-  walkSpeed: 4
+  walkSpeed: 3
