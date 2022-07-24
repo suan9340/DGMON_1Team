@@ -83,14 +83,14 @@ public class StarPoint : MonoBehaviour
     {
         if (other.gameObject.CompareTag("StarPoint"))
         {
-            GameManager.Instance.Sound.getCoin.Play();
+            SoundManager.Instance.Sound_GetStar();
             StarPoint starpoint = other.GetComponent<StarPoint>();
             starPoint++;
             Destroy(other.gameObject);
         }
         if (other.gameObject.CompareTag("StarFirst"))
         {
-            GameManager.Instance.Sound.getCoin.Play();
+            SoundManager.Instance.Sound_GetStar();
             StarFirst();
             StarPoint starFirst = other.GetComponent<StarPoint>();
             starPoint++;

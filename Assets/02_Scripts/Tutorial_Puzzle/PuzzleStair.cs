@@ -42,7 +42,7 @@ public class PuzzleStair : MonoBehaviour
         {
             CheckStairNum(true);
             stairEffect.Play();
-            GameManager.Instance.Sound.clearLevel.Play();
+            SoundManager.Instance.Sound_Stair_Hint();
         }
         else
             CheckStairNum(false);

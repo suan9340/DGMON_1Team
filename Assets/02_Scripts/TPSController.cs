@@ -124,7 +124,7 @@ public class TPSController : MonoBehaviour
         jDown = Input.GetButtonDown("Jump");
         if (jDown && !isJump)
         {
-            GameManager.Instance.Sound.jumpSound.Play();
+            SoundManager.Instance.Sound_PlayerJump();
             myrigid.AddForce(Vector3.up * playerData.jumpPower, ForceMode.Impulse);
             myanim.SetBool("isJump", true);
             myanim.SetTrigger("doJump");

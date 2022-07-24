@@ -25,7 +25,7 @@ public class TuTorialManager : MonoBehaviour
 
     private void MoveDoor()
     {
-        GameManager.Instance.Sound.completeSond.Play();
+        SoundManager.Instance.Sound_StairClear();
         cleareffect.Play();
         puzzleClearDoor.transform.DOMoveY(22, 3f);
     }
