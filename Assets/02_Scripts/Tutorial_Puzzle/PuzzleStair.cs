@@ -42,6 +42,7 @@ public class PuzzleStair : MonoBehaviour
         {
             CheckStairNum(true);
             stairEffect.Play();
+            //ParticleManager.Instance.AddParticle(ParticleManager.ParticleType.stairHint, transform.position);
             SoundManager.Instance.Sound_Stair_Hint();
         }
         else

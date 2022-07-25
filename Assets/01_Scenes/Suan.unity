@@ -10480,7 +10480,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 681564895}
-  - component: {fileID: 681564894}
   m_Layer: 0
   m_Name: EffectManager
   m_TagString: Untagged
@@ -10488,18 +10487,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &681564894
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 681564893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89d7354c56d79584aa1452e0bfae99df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &681564895
 Transform:
   m_ObjectHideFlags: 0
@@ -19824,11 +19811,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00669ec5cb5c871419e6ea03a8ee9c15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BGMInfo: []
+  VFXInfo: []
   BgmAudio: {fileID: 1523784259}
-  clearLevel: {fileID: 1523784262}
-  jumpSound: {fileID: 1523784263}
-  completeSond: {fileID: 1523784264}
-  getCoin: {fileID: 1523784265}
+  FXAudio: {fileID: 0}
+  FX2Audio: {fileID: 0}
+  FX3Audio: {fileID: 0}
+  BGMSlider: {fileID: 0}
+  VFXSlider: {fileID: 0}
 --- !u!82 &1523784262
 AudioSource:
   m_ObjectHideFlags: 0
@@ -21844,9 +21834,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameState: 0
-  soundManager: {fileID: 1523784261}
-  tutoManager: {fileID: 1285968396}
-  uIManager: {fileID: 121222296}
 --- !u!4 &1703915383
 Transform:
   m_ObjectHideFlags: 0
