@@ -38,29 +38,63 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private List<AudioInfo> VFXInfo = new List<AudioInfo>();
 
 
-    [Header("[[---BGM---]]")] 
+    [Header("[[---BGM---]]")]
     public AudioSource BgmAudio = null;
 
 
     [Header("[[---EFFECT---]]")]
-    //public AudioSource clearLevel = null;
-    //public AudioSource jumpSound = null;
-    //public AudioSource completeSond = null;
-    //public AudioSource getStar = null;
     public AudioSource FXAudio = null;
     public AudioSource FX2Audio = null;
+    public AudioSource FX3Audio = null;
 
-    public void SetBGMSlider(float _volume)
+    [Header("[[---AudioSetting Sliders---]]")]
+    public Slider BGMSlider = null;
+    public Slider VFXSlider = null;
+
+
+    private float bgmVol = 1f;
+    private float vfxVol = 1f;
+
+    // Set String 
+    private string VOL_BGM = ConstantManager.VOL_BGM;
+    private string VOL_VFX = ConstantManager.VOL_VFX;
+    private void Start()
     {
-        BgmAudio.volume = _volume;
+        SettingVolume();
     }
 
-    public void SetEFFECTSlider(float _voulme)
+    private void SettingVolume()
     {
-        //clearLevel.volume = _voulme;
-        //jumpSound.volume = _voulme;
-        //completeSond.volume = _voulme;
-        //getStar.volume = _voulme;
+        bgmVol = PlayerPrefs.GetFloat(VOL_BGM, 1f);
+        BGMSlider.value = bgmVol;
+
+        vfxVol = PlayerPrefs.GetFloat(VOL_VFX, 1f);
+        VFXSlider.value = vfxVol;
+    }
+
+    /// <summary>
+    /// 설정에서 배경음 슬라이더 조절하는 함수
+    /// </summary>
+    public void SetBGMSoundSlider()
+    {
+        BgmAudio.volume = BGMSlider.value;
+        bgmVol = BGMSlider.value;
+
+        PlayerPrefs.SetFloat(VOL_BGM, bgmVol);
+    }
+
+    /// <summary>
+    /// 설정에서 효과음 슬라이더 조절하는 함수
+    /// </summary>
+    public void SetVFXSoundSlider()
+    {
+        FXAudio.volume = VFXSlider.value;
+        FX2Audio.volume = VFXSlider.value;
+        FX3Audio.volume = VFXSlider.value;
+
+        vfxVol = VFXSlider.value;
+
+        PlayerPrefs.SetFloat(VOL_VFX, vfxVol);
     }
 
     /// <summary>
@@ -109,5 +143,11 @@ public class SoundManager : MonoBehaviour
     {
         FX2Audio.clip = VFXInfo[3].clip;
         FX2Audio.Play();
+    }
+
+    public void Sound_ButtonClick()
+    {
+        FX3Audio.clip = VFXInfo[4].clip;
+        FX3Audio.Play();
     }
 }

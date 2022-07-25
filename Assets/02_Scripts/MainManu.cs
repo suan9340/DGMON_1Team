@@ -13,53 +13,88 @@ public class MainManu : MonoBehaviour
     private bool isOutGame = false;
     private bool isSetting = false;
 
+    private void Start()
+    {
+        SoundManager.Instance.Sound_TutoBGM();
+    }
+
     private void Update()
     {
-        if (isOutGame || isSetting)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (isOutGame)
             {
-                OnClickNoQuit();
-                OnClickQuitSetting();
+                OnClickQuitGame();
+            }
+            if (isSetting)
+            {
+                OnClickSetting();
             }
         }
     }
 
+    /// <summary>
+    /// 게임 시작 눌렀을 때
+    /// </summary>
     public void OnClickStartGame()
     {
+        SoundManager.Instance.Sound_ButtonClick();
         GameManager.Instance.SetGameState(GameState.isPlaying);
-        SceneManager.LoadScene("TuTorial");
+        SceneManager.LoadScene(1);
     }
 
+
+
+    /// <summary>
+    /// 게임 나갈껀지 물어봤을 때 네! 라고 했을 때
+    /// </summary>
     public void OnClickYesQuit()
     {
+        SoundManager.Instance.Sound_ButtonClick();
+        Debug.Log("Quit Game Sucess!");
         Application.Quit();
     }
 
-    public void OnClickNoQuit()
-    {
-        gameQuitObj.gameObject.SetActive(false);
-        gameQuitObj.transform.DOScaleY(0f, 0.15f).SetUpdate(true);
-        isOutGame = false;
-    }
 
+
+    /// <summary>
+    /// 게임 나간다고 눌렀을 때
+    /// </summary>
     public void OnClickQuitGame()
     {
-        gameQuitObj.gameObject.SetActive(true);
-        gameQuitObj.transform.DOScaleY(1f, 0.15f).SetUpdate(true);
-        isOutGame = true;
-    }
-    public void OnClickSetting()
-    {
-        SetChangObj.gameObject.SetActive(true);
-        isSetting = true;
-        SetChangObj.transform.DOScaleY(1f, 0.15f).SetUpdate(true);
+        SoundManager.Instance.Sound_ButtonClick();
+
+        isOutGame = !isOutGame;
+        if (isOutGame)
+        {
+            gameQuitObj.SetActive(true);
+            gameQuitObj.transform.DOScaleY(1f, 0.15f).SetUpdate(true);
+        }
+        else
+        {
+            gameQuitObj.transform.DOScaleY(0f, 0.15f).SetUpdate(true).OnComplete(() => { gameQuitObj.SetActive(false); });
+        }
     }
 
-    public void OnClickQuitSetting()
+
+
+    /// <summary>
+    /// 게임 설정 눌렀을 때
+    /// </summary>
+    public void OnClickSetting()
     {
-        SetChangObj.gameObject.SetActive(false);
-        isSetting = false;
-        SetChangObj.transform.DOScaleY(0f, 0.15f).SetUpdate(true);
+        SoundManager.Instance.Sound_ButtonClick();
+
+        isSetting = !isSetting;
+        if (isSetting)
+        {
+            SetChangObj.SetActive(true);
+            SetChangObj.transform.DOScaleY(1f, 0.15f).SetUpdate(true);
+        }
+        else
+        {
+            SetChangObj.transform.DOScaleY(0f, 0.15f).SetUpdate(true).OnComplete(() => { SetChangObj.SetActive(false); });
+        }
+
     }
 }

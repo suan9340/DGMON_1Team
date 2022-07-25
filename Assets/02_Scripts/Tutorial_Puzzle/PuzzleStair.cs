@@ -47,7 +47,7 @@ public class PuzzleStair : MonoBehaviour
         else
             CheckStairNum(false);
 
-        GameManager.Instance.Tutorial.CheckOpenDoor();
+        TuTorialManager.Instance.CheckOpenDoor();
     }
 
 
@@ -57,27 +57,27 @@ public class PuzzleStair : MonoBehaviour
         switch (stairnum)
         {
             case 0:
-                GameManager.Instance.Tutorial.isDone[0] = isA;
+                TuTorialManager.Instance.isDone[0] = isA;
                 break;
 
             case 1:
-                GameManager.Instance.Tutorial.isDone[1] = isA;
+                TuTorialManager.Instance.isDone[1] = isA;
                 break;
 
             case 2:
-                GameManager.Instance.Tutorial.isDone[2] = isA;
+                TuTorialManager.Instance.isDone[2] = isA;
                 break;
 
             case 3:
-                GameManager.Instance.Tutorial.isDone[3] = isA;
+                TuTorialManager.Instance.isDone[3] = isA;
                 break;
 
             case 4:
-                GameManager.Instance.Tutorial.isDone[4] = isA;
+                TuTorialManager.Instance.isDone[4] = isA;
                 break;
 
             case 5:
-                GameManager.Instance.Tutorial.isDone[5] = isA;
+                TuTorialManager.Instance.isDone[5] = isA;
                 break;
         }
     }

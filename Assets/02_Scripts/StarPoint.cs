@@ -55,7 +55,8 @@ public class StarPoint : MonoBehaviour
                     starPoint += -needStar;
                     GetComponent<StarClear>().enabled = true;
                     Destroy(StageClear);
-                    GameManager.Instance.UI.EndGame();
+
+                    UIManager.Instance.EndGame();
 
                     StopAllCoroutines();
                     break;

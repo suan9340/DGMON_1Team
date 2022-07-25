@@ -5,11 +5,38 @@ using UnityEngine;
 
 public class TuTorialManager : MonoBehaviour
 {
+    #region SingleTon
+
+    private static TuTorialManager _instance = null;
+    public static TuTorialManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<TuTorialManager>();
+                if (_instance == null)
+                {
+                    _instance = new GameObject("TuTorialManager").AddComponent<TuTorialManager>();
+                }
+            }
+            return _instance;
+        }
+    }
+
+    #endregion
+
     public List<bool> isDone = new List<bool>();
     public GameObject puzzleClearDoor = null;
 
     public ParticleSystem cleareffect = null;
     int cnt = 0;
+
+    private void Start()
+    {
+        SoundManager.Instance.Sound_TutoBGM();    
+    }
+
     public void CheckOpenDoor()
     {
         cnt = 0;

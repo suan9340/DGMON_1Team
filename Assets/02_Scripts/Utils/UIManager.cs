@@ -8,6 +8,27 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    #region SingleTon
+
+    private static UIManager _instance = null;
+    public static UIManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<UIManager>();
+                if (_instance == null)
+                {
+                    _instance = new GameObject("UIManager").AddComponent<UIManager>();
+                }
+            }
+            return _instance;
+        }
+    }
+
+    #endregion
+
     [Header("------UI 게임오브젝트------")]
     [Tooltip("큰 설정창")] public Image bigSetChang = null;
 
@@ -25,54 +46,29 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private void SettingChangSet()
+    /// <summary>
+    /// 설정창 눌렀을 때
+    /// </summary>
+    public void SettingChangSet()
     {
+        SoundManager.Instance.Sound_ButtonClick();
+
         isSettingChang = !isSettingChang;
-        if (!isSettingChang)
+        if (isSettingChang)
         {
-            settingChang.SetActive(false);
-            Time.timeScale = 1f;
-
-            GameManager.Instance.SetGameState(GameState.isPlaying);
-            bigSetChang.gameObject.SetActive(false);
-            bigSetChang.transform.DOScaleY(0f, 0.15f).SetUpdate(true);
-        }
-        else
-        {
-            settingMenuChang.SetActive(true);
-            Time.timeScale = 0f;
-
             bigSetChang.gameObject.SetActive(true);
             GameManager.Instance.SetGameState(GameState.isSetting);
             bigSetChang.transform.DOScaleY(1f, 0.15f).SetUpdate(true);
+
+            Time.timeScale = 0f;
         }
-    }
+        else
+        {
+            GameManager.Instance.SetGameState(GameState.isPlaying);
+            bigSetChang.transform.DOScaleY(0f, 0.15f).SetUpdate(true).OnComplete(() => { bigSetChang.gameObject.SetActive(false); });
 
-    // click 설정창 닫기
-    public void OnClickSetQick()
-    {
-        SettingChangSet();
-    }
-
-    // click 닫기
-    public void OnClickReallySetOut()
-    {
-        settingChang.SetActive(false);
-        SettingChangSet();
-    }
-
-    // click 설정
-    public void OnClickOption()
-    {
-        settingMenuChang.SetActive(false);
-        settingChang.SetActive(true);
-    }
-
-    // click 게임종료
-    public void OnClickQuit()
-    {
-        Debug.Log("게임 종료");
-        Application.Quit();
+            Time.timeScale = 1f;
+        }
     }
 
     public void EndGame()
@@ -84,7 +80,7 @@ public class UIManager : MonoBehaviour
 
     public void OnClickEndGameStartScene()
     {
-        SceneManager.LoadScene("StartScene");
+        SceneManager.LoadScene(0);
         GameManager.Instance.SetGameState(GameState.isStarting);
     }
 
