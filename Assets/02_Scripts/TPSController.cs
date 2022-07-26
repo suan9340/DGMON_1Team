@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 using UnityEngine.UI;
 
 public class TPSController : MonoBehaviour
@@ -32,14 +33,18 @@ public class TPSController : MonoBehaviour
     private Rigidbody myrigid;
     private Animator myanim;
 
+    public Ease ease;
+
+    private CharacterController controller;
     private void Awake()
     {
+        controller = GetComponent<CharacterController>();
         ConnectData();
 
         myrigid = GetComponent<Rigidbody>();
         myanim = GetComponentInChildren<Animator>();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
     }
 
 
@@ -65,6 +70,7 @@ public class TPSController : MonoBehaviour
         //Jump();
         //LookAround();
         Move();
+        //Move2();
         SpeedControl();
     }
 
@@ -94,12 +100,33 @@ public class TPSController : MonoBehaviour
             transform.position += moveDir * speed * Time.deltaTime;
         }
 
+        //controller.Move(moveDir * speed * Time.deltaTime);
+        //moveDir.y += Physics.gravity.y * Time.deltaTime;
         if (isCantrun)
         {
             myanim.SetBool("isRun", false);
             return;
         }
         myanim.SetBool("isRun", isRun);
+    }
+
+
+    private void Move2()
+    {
+        var _ho = Input.GetAxis(ConstantManager.MV_HO);
+        var _ve = Input.GetAxis(ConstantManager.MV_VE);
+
+        moveDir = new Vector3(_ho, 0, _ve) * speed;
+
+        if (controller.isGrounded)
+        {
+            if (Input.GetButton(ConstantManager.MV_JP))
+                moveDir.y = playerData.jumpPower;
+        }
+
+        moveDir.y += Physics.gravity.y * Time.deltaTime * playerData.gravitySpeed;
+        moveDir = transform.TransformDirection(moveDir);
+        controller.Move(moveDir * Time.deltaTime);
     }
 
 
@@ -126,8 +153,12 @@ public class TPSController : MonoBehaviour
         jDown = Input.GetButtonDown("Jump");
         if (jDown && !isJump)
         {
+            var _current = transform.localPosition;
             SoundManager.Instance.Sound_PlayerJump();
-            myrigid.AddForce(Vector3.up * playerData.jumpPower, ForceMode.Impulse);
+            //myrigid.AddForce(Vector3.up * playerData.jumpPower, ForceMode.Impulse);
+            DOTween.To(() => transform.localPosition, x => transform.localPosition = x, new Vector3(_current.x, _current.y + 2, _current.z), 1f)
+                .SetEase(ease).SetLoops(1, LoopType.Yoyo);
+
             myanim.SetBool("isJump", true);
             myanim.SetTrigger("doJump");
             isJump = true;
