@@ -15,5 +15,5 @@ MonoBehaviour:
   sensivity: 5
   normalSpeed: 7
   runSpeed: 9
-  jumpPower: 7
+  jumpPower: 12
   walkSpeed: 3

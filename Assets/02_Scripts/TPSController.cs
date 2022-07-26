@@ -22,7 +22,6 @@ public class TPSController : MonoBehaviour
     private float speed;
 
     private bool isRun;
-    private bool isWalk;
     private bool jDown;
     private bool isJump;
 
@@ -47,7 +46,7 @@ public class TPSController : MonoBehaviour
 
     private void Update()
     {
-        UISet();
+        //UISet();
         if (GameManager.Instance.gameState == GameState.isSetting)
             return;
         PlayGameSet();
@@ -63,10 +62,10 @@ public class TPSController : MonoBehaviour
     // GameSetting
     private void PlayGameSet()
     {
-        LookAround();
+        //Jump();
+        //LookAround();
         Move();
         SpeedControl();
-        Jump();
     }
 
     private void UISet()
@@ -74,12 +73,15 @@ public class TPSController : MonoBehaviour
         SettingGazeSlider();
     }
 
+    /// <summary>
+    /// 플레이어의 이동
+    /// </summary>
     private void Move()
     {
         isRun = Input.GetKey(KeyCode.LeftShift);
-        isWalk = Input.GetKey(KeyCode.LeftControl);
         Vector2 moveInput = new Vector2(Input.GetAxis(ConstantManager.MV_HO), Input.GetAxis(ConstantManager.MV_VE));
         bool isMove = moveInput.magnitude != 0;
+        myanim.SetBool("isWalk", isMove);
 
         if (isMove)
         {
@@ -92,8 +94,6 @@ public class TPSController : MonoBehaviour
             transform.position += moveDir * speed * Time.deltaTime;
         }
 
-        myanim.SetBool("isWalk", isMove);
-        myanim.SetBool("isSlowWalk", isWalk);
         if (isCantrun)
         {
             myanim.SetBool("isRun", false);
@@ -103,22 +103,24 @@ public class TPSController : MonoBehaviour
     }
 
 
-    // run, walk, slow walk ... Control Player Speed
+    /// <summary>
+    /// 플레이어가 뛰는지, 걷는지 속도 구분
+    /// </summary>
     private void SpeedControl()
     {
         if (isRun && isCantrun == false)
         {
             speed = playerData.runSpeed;
-            CountSlider();
+            //CountSlider();
         }
-        else if (isWalk)
-            speed = playerData.walkSpeed;
         else
             speed = playerData.normalSpeed;
     }
 
 
-    // Player jump
+    /// <summary>
+    /// 플레이어를 점프해주는 함수
+    /// </summary>
     private void Jump()
     {
         jDown = Input.GetButtonDown("Jump");
@@ -133,7 +135,10 @@ public class TPSController : MonoBehaviour
     }
 
 
-    // if player on the floor, change can jump
+    /// <summary>
+    /// 플레이어가 땅에 닿았을 때 점프 활성화
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("Switch") || collision.gameObject.CompareTag("PuzzleCube"))
