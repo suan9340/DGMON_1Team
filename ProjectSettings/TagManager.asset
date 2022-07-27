@@ -15,6 +15,7 @@ TagManager:
   - Guide
   - Guide2
   - CinemachineTarget
+  - PUZZLE1
   layers:
   - Default
   - TransparentFX

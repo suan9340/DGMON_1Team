@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PuzzleStair : MonoBehaviour
 {
-    public int num = 0;
+    private int stairColor_num = 0;
     public int stairnum;
 
     public List<Color> mycolors = new List<Color>();
@@ -12,10 +12,18 @@ public class PuzzleStair : MonoBehaviour
 
     public ParticleSystem stairEffect = null;
 
+    private bool isOn = false;
+
+    private int clearNum;
+
     private void Start()
     {
+        clearNum = mycolors.Count - 1;
+
         material = GetComponent<Renderer>().material;
-        material.color = mycolors[num];
+        //material.color = mycolors[stairColor_num];
+
+        SetRandomStairColor();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -26,29 +34,38 @@ public class PuzzleStair : MonoBehaviour
         }
     }
 
+    private void SetRandomStairColor()
+    {
+        var randNum = Random.Range(0, mycolors.Count - 2);
+        material.color = mycolors[randNum];
+        //Debug.Log($"{stairnum} 번 계단의 숫자는 {randNum}");
+    }
+
     private void PlusNum()
     {
-        if (num >= mycolors.Count - 1)
+        if (isOn) return;
+
+        if (stairColor_num >= mycolors.Count - 1)
         {
-            num = 0;
+            stairColor_num = 0;
         }
         else
         {
-            num++;
+            stairColor_num++;
         }
-        material.color = mycolors[num];
+        material.color = mycolors[stairColor_num];
 
-        if (num == 2)
+        if (stairColor_num == clearNum)
         {
-            CheckStairNum(true);
+            isOn = true;
             stairEffect.Play();
-            //ParticleManager.Instance.AddParticle(ParticleManager.ParticleType.stairHint, transform.position);
             SoundManager.Instance.Sound_Stair_Hint();
+            CheckStairNum(true);
+
+            TuTorialManager.Instance.CheckOpenDoor();
         }
         else
             CheckStairNum(false);
-
-        TuTorialManager.Instance.CheckOpenDoor();
     }
 
 

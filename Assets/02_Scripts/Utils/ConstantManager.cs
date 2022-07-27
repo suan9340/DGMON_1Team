@@ -9,4 +9,7 @@ public class ConstantManager
 
     public const string VOL_BGM = "BGMVolume";
     public const string VOL_VFX = "VFXVolume";
+
+    public const string TAG_PLAYER = "Player";
+    public const string TAG_PZ1 = "PUZZLE1";
 }

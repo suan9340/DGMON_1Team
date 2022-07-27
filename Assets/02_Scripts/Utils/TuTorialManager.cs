@@ -37,6 +37,11 @@ public class TuTorialManager : MonoBehaviour
         SoundManager.Instance.Sound_TutoBGM();    
     }
 
+    #region Puzzle 1 Fuctions
+
+    /// <summary>
+    /// 조건을 다 만족했는지 체크하고 맞다면 문 열리게
+    /// </summary>
     public void CheckOpenDoor()
     {
         cnt = 0;
@@ -50,10 +55,16 @@ public class TuTorialManager : MonoBehaviour
             MoveDoor();
     }
 
+    /// <summary>
+    /// 처음에 문 열리게 하는거
+    /// </summary>
     private void MoveDoor()
     {
         SoundManager.Instance.Sound_StairClear();
         cleareffect.Play();
-        puzzleClearDoor.transform.DOMoveY(22, 3f);
-    }
+        puzzleClearDoor.transform.DOMoveY(18f, 3f);
+    } 
+    #endregion
+
+
 }
