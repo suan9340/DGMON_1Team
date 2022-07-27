@@ -52,8 +52,8 @@ public class SoundManager : MonoBehaviour
     public Slider VFXSlider = null;
 
 
-    private float bgmVol = 1f;
-    private float vfxVol = 1f;
+    public float bgmVol;
+    public float vfxVol;
 
     // Set String 
     private string VOL_BGM = ConstantManager.VOL_BGM;

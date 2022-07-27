@@ -131,7 +131,7 @@ namespace StarterAssets
             {
                 _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
             }
-
+            FootstepAudioVolume = PlayerPrefs.GetFloat(ConstantManager.VOL_VFX, 1f);
             ConnectData();
         }
 
@@ -286,6 +286,7 @@ namespace StarterAssets
 
                 if (_input.jump && _jumpTimeoutDelta <= 0.0f)
                 {
+                    Debug.Log("Jump!");
                     _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
 
                     if (_hasAnimator)
@@ -351,6 +352,9 @@ namespace StarterAssets
                 if (FootstepAudioClips.Length > 0)
                 {
                     var index = Random.Range(0, FootstepAudioClips.Length);
+                    SettingVFXSoundWithSoundManager();
+
+                   
                     AudioSource.PlayClipAtPoint(FootstepAudioClips[index], transform.TransformPoint(_controller.center), FootstepAudioVolume);
                 }
             }
@@ -360,8 +364,18 @@ namespace StarterAssets
         {
             if (animationEvent.animatorClipInfo.weight > 0.5f)
             {
+                SettingVFXSoundWithSoundManager();
                 AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
             }
+        }
+
+        private void SettingVFXSoundWithSoundManager()
+        {
+            if (FootstepAudioVolume != PlayerPrefs.GetFloat(ConstantManager.VOL_VFX, 1f))
+            {
+                FootstepAudioVolume = PlayerPrefs.GetFloat(ConstantManager.VOL_VFX, 1f);
+            }
+
         }
     }
 }

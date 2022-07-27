@@ -10,4 +10,6 @@ public class PlayerData : ScriptableObject
     public float runSpeed;
     public float jumpPower;
     public float gravitySpeed;
+
+    public int starCnt;
 }

@@ -3560,6 +3560,7 @@ GameObject:
   - component: {fileID: 4761417695479898171}
   - component: {fileID: 4761417695479898168}
   - component: {fileID: 4761417695479898169}
+  - component: {fileID: 1670166791}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -3646,7 +3647,7 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: KeyboardMouse
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -3667,8 +3668,8 @@ MonoBehaviour:
   jump: 0
   sprint: 0
   analogMovement: 0
-  cursorLocked: 1
-  cursorInputForLook: 1
+  cursorLocked: 0
+  cursorInputForLook: 0
 --- !u!114 &4761417695479898169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3698,7 +3699,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 274649b0e221539409070ebf6c18918b, type: 3}
   - {fileID: 8300000, guid: a3194b8bbc96ef84fab1f98f4b7dae3e, type: 3}
   FootstepAudioVolume: 0.5
-  JumpHeight: 1.2
+  JumpHeight: 1.8
   Gravity: -15
   JumpTimeout: 0
   FallTimeout: 0.15
@@ -3713,6 +3714,20 @@ MonoBehaviour:
   BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
+--- !u!136 &1670166791
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4761417695479898172}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &4761417695481271965
 GameObject:
   m_ObjectHideFlags: 0
@@ -4611,7 +4626,7 @@ GameObject:
   - component: {fileID: 4761417695650395795}
   m_Layer: 9
   m_Name: CharacterPrefab_Rig
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

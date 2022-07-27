@@ -5693,6 +5693,8 @@ MonoBehaviour:
   FX3Audio: {fileID: 2041377178}
   BGMSlider: {fileID: 0}
   VFXSlider: {fileID: 0}
+  bgmVol: 0
+  vfxVol: 0
 --- !u!4 &1671644262
 Transform:
   m_ObjectHideFlags: 0
