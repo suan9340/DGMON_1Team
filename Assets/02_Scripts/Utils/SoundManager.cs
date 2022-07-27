@@ -34,6 +34,11 @@ public class SoundManager : MonoBehaviour
     }
     #endregion
 
+    public enum SoundType
+    {
+
+    }
+
     [SerializeField] private List<AudioInfo> BGMInfo = new List<AudioInfo>();
     [SerializeField] private List<AudioInfo> VFXInfo = new List<AudioInfo>();
 

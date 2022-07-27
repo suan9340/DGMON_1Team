@@ -29,29 +29,19 @@ public class ParticleManager : MonoBehaviour
 
     public enum ParticleType
     {
-        stairHint,
-        stairDoorOpen,
+        startPointEat,
     }
 
     public int AddParticle(ParticleType pt, Vector3 pos)
     {
         switch (pt)
         {
-            case ParticleType.stairHint:
+            case ParticleType.startPointEat:
                 if (false == particleDic.ContainsKey(pt))
                 {
-                    Debug.Log("qwe");
-                    particleDic[pt] = Resources.Load<GameObject>("VFX/StairHint_VFX");
+                    particleDic[pt] = Resources.Load<GameObject>("VFX/StarEat_VFX");
                 }
                 break;
-
-            case ParticleType.stairDoorOpen:
-                if (false == particleDic.ContainsKey(pt))
-                {
-                    particleDic[pt] = Resources.Load<GameObject>("VFX/StairOpen_VFX");
-                }
-                break;
-
 
             default:
                 Debug.LogWarning("연결하지 않은 파티클이 있다고!?!?!");
