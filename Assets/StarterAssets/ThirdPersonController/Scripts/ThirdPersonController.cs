@@ -20,7 +20,6 @@ namespace StarterAssets
 
         [Tooltip("Sprint speed of the character in m/s")]
         public float runSpeed = 5.335f;
-        public float sensitivy = 8f;
 
         [Tooltip("How fast the character turns to face movement direction")]
         [Range(0.0f, 0.3f)]
@@ -111,6 +110,8 @@ namespace StarterAssets
 
         private bool _hasAnimator;
 
+        private PlayerData playerData;
+
         private bool IsCurrentDeviceMouse
         {
             get
@@ -130,12 +131,14 @@ namespace StarterAssets
             {
                 _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
             }
+
+            ConnectData();
         }
 
         private void Start()
         {
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
-            
+
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
@@ -166,6 +169,13 @@ namespace StarterAssets
             CameraRotation();
         }
 
+        public void ConnectData()
+        {
+            const string SAVE_PATH = "SO/";
+            playerData = Resources.Load<PlayerData>(SAVE_PATH + "PlayerData");
+
+        }
+
         private void AssignAnimationIDs()
         {
             _animIDSpeed = Animator.StringToHash("Speed");
@@ -192,7 +202,7 @@ namespace StarterAssets
         {
             if (_input.look.sqrMagnitude >= _threshold && !LockCameraPosition)
             {
-                float deltaTimeMultiplier = IsCurrentDeviceMouse ? sensitivy : Time.deltaTime;
+                float deltaTimeMultiplier = IsCurrentDeviceMouse ? playerData.sensivity : Time.deltaTime;
 
                 _cinemachineTargetYaw += _input.look.x * deltaTimeMultiplier;
                 _cinemachineTargetPitch += _input.look.y * deltaTimeMultiplier;

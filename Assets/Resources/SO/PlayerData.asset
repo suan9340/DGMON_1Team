@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94a663f14f315364481ec2d896481d49, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  sensivity: 5
+  sensivity: 8
   normalSpeed: 7
   runSpeed: 9
   jumpPower: 12
