@@ -41,6 +41,9 @@ public class UIManager : MonoBehaviour
     [Header("별 먹었을 떄 화면에 띌 이미지")]
     public GameObject eatStar_Image = null;
 
+    [Header("감도조절 슬라이더")]
+    public Slider sensitivitySlider = null;
+
     private bool isSettingChang = false;
 
     private PlayerData playerData;
@@ -129,5 +132,14 @@ public class UIManager : MonoBehaviour
     public void EatStarUI()
     {
         StartCoroutine(ScreenEatStar());
+    }
+
+
+    /// <summary>
+    /// 설정창에서 감도조절 했을 때
+    /// </summary>
+    public void OnClickSensivitivy()
+    {
+
     }
 }
