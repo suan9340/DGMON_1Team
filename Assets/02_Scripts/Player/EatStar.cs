@@ -19,21 +19,18 @@ public class EatStar : MonoBehaviour
     {
         if (other.CompareTag(tag_star))
         {
-            //if (isGet) return;
-            //isGet = true;
             playerData.starCnt++;
+            UIManager.Instance.EatStarUI();
 
-            UIManager.Instance.UpdateStarUI();
             Destroy(other.gameObject);
-
             var starPos = other.transform.position;
+            UIManager.Instance.UpdateStarUI();
+
             ParticleManager.Instance.AddParticle(ParticleManager.ParticleType.startPointEat, starPos);
             SoundManager.Instance.Sound_GetStar();
-
-
-            Debug.Log("qwe");
         }
     }
+
 
     /// <summary>
     /// Connect Scriptable Object (PlayerData)

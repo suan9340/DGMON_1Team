@@ -35,11 +35,17 @@ public class UIManager : MonoBehaviour
     [Tooltip("큰 설정창")] public GameObject settingMenuChang = null;
     [Tooltip("겜 끝")] public GameObject endGameChang = null;
 
+    [Header("오른쪽 상단 별 UI")]
     [Tooltip("별 UI")] public Text starUIText = null;
+
+    [Header("별 먹었을 떄 화면에 띌 이미지")]
+    public GameObject eatStar_Image = null;
 
     private bool isSettingChang = false;
 
     private PlayerData playerData;
+
+    private readonly WaitForSeconds starEatScreenDelay = new WaitForSeconds(0.3f);
 
     private void Awake()
     {
@@ -108,5 +114,20 @@ public class UIManager : MonoBehaviour
     public void UpdateStarUI()
     {
         starUIText.text = $"★ : {playerData.starCnt}";
+    }
+
+    public IEnumerator ScreenEatStar()
+    {
+        eatStar_Image.SetActive(true);
+        yield return starEatScreenDelay;
+        eatStar_Image.SetActive(false);
+    }
+
+    /// <summary>
+    /// 별 먹었을 때 화면에서 약간 보이게
+    /// </summary>
+    public void EatStarUI()
+    {
+        StartCoroutine(ScreenEatStar());
     }
 }
