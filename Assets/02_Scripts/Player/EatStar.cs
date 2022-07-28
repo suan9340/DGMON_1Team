@@ -22,6 +22,7 @@ public class EatStar : MonoBehaviour
             if (isGet) return;
             isGet = true;
 
+            UIManager.Instance.UpdateStarUI();
             Destroy(other.gameObject);
 
             var starPos = other.transform.position;

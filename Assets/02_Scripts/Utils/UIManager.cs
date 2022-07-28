@@ -35,14 +35,29 @@ public class UIManager : MonoBehaviour
     [Tooltip("큰 설정창")] public GameObject settingMenuChang = null;
     [Tooltip("겜 끝")] public GameObject endGameChang = null;
 
+    [Tooltip("별 UI")] public Text starUIText = null;
+
     private bool isSettingChang = false;
 
+    private PlayerData playerData;
+
+    private void Awake()
+    {
+        ConnectData();
+        UpdateStarUI();
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SettingChangSet();
         }
+    }
+
+    public void ConnectData()
+    {
+        const string SAVE_PATH = "SO/";
+        playerData = Resources.Load<PlayerData>(SAVE_PATH + "PlayerData");
     }
 
     /// <summary>
@@ -88,5 +103,10 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.SetGameState(GameState.isPlaying);
         endGameChang.gameObject.SetActive(false);
         endGameChang.transform.DOScaleY(0f, 0.15f).SetUpdate(true);
+    }
+
+    public void UpdateStarUI()
+    {
+        starUIText.text = $"★ : {playerData.starCnt}";
     }
 }

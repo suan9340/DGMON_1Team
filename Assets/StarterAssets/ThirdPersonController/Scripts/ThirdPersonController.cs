@@ -173,7 +173,6 @@ namespace StarterAssets
         {
             const string SAVE_PATH = "SO/";
             playerData = Resources.Load<PlayerData>(SAVE_PATH + "PlayerData");
-
         }
 
         private void AssignAnimationIDs()
