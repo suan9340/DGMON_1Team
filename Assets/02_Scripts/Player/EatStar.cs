@@ -19,8 +19,9 @@ public class EatStar : MonoBehaviour
     {
         if (other.CompareTag(tag_star))
         {
-            if (isGet) return;
-            isGet = true;
+            //if (isGet) return;
+            //isGet = true;
+            playerData.starCnt++;
 
             UIManager.Instance.UpdateStarUI();
             Destroy(other.gameObject);
@@ -29,7 +30,6 @@ public class EatStar : MonoBehaviour
             ParticleManager.Instance.AddParticle(ParticleManager.ParticleType.startPointEat, starPos);
             SoundManager.Instance.Sound_GetStar();
 
-            playerData.starCnt++;
 
             Debug.Log("qwe");
         }

@@ -13,7 +13,4 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   sensivity: 8
-  normalSpeed: 7
-  runSpeed: 9
-  jumpPower: 77.4
-  gravitySpeed: 5
+  starCnt: 3

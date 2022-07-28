@@ -36,24 +36,16 @@ public class PuzzleStair : MonoBehaviour
 
     private void SetRandomStairColor()
     {
-        var randNum = Random.Range(0, mycolors.Count - 2);
-        material.color = mycolors[randNum];
-        //Debug.Log($"{stairnum} 번 계단의 숫자는 {randNum}");
+        stairColor_num = Random.Range(0, mycolors.Count - 2);
+        UpdateStairColor();
     }
 
     private void PlusNum()
     {
         if (isOn) return;
-
-        if (stairColor_num >= mycolors.Count - 1)
-        {
-            stairColor_num = 0;
-        }
-        else
-        {
-            stairColor_num++;
-        }
-        material.color = mycolors[stairColor_num];
+        
+        stairColor_num++;
+        UpdateStairColor();
 
         if (stairColor_num == clearNum)
         {
@@ -98,5 +90,10 @@ public class PuzzleStair : MonoBehaviour
                 TuTorialManager.Instance.isDone[5] = isA;
                 break;
         }
+    }
+
+    private void UpdateStairColor()
+    {
+        material.color = mycolors[stairColor_num];
     }
 }
