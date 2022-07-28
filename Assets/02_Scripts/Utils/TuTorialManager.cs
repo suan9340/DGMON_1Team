@@ -62,7 +62,7 @@ public class TuTorialManager : MonoBehaviour
     {
         SoundManager.Instance.Sound_StairClear();
         cleareffect.Play();
-        puzzleClearDoor.transform.DOMoveY(18f, 3f);
+        puzzleClearDoor.transform.DOMoveY(15f, 3f);
     } 
     #endregion
 
