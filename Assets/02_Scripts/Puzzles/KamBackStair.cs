@@ -21,7 +21,7 @@ public class KamBackStair : MonoBehaviour
         {
             s = stair[num];
 
-            if (num >= 9)
+            if (num >= stair.Count - 1)
                 num = 0;
             else
                 num++;
