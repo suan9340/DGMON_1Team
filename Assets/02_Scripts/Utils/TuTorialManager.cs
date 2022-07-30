@@ -26,15 +26,20 @@ public class TuTorialManager : MonoBehaviour
 
     #endregion
 
-    public List<bool> isDone = new List<bool>();
+    [HideInInspector] public List<bool> isDone = new List<bool>();
     public GameObject puzzleClearDoor = null;
 
     public ParticleSystem cleareffect = null;
     int cnt = 0;
+    //-------------------------------------------------------------------//
+
+    public Color puzzle3DefaultColor;
 
     private void Start()
     {
-        SoundManager.Instance.Sound_TutoBGM();    
+        SoundManager.Instance.Sound_TutoBGM();
+
+        SetDefaultColor();
     }
 
     #region Puzzle 1 Fuctions
@@ -63,8 +68,17 @@ public class TuTorialManager : MonoBehaviour
         SoundManager.Instance.Sound_StairClear();
         cleareffect.Play();
         puzzleClearDoor.transform.DOMoveY(15f, 3f);
-    } 
+    }
     #endregion
 
+    #region Puzzle 2 Functions
 
+    private void SetDefaultColor()
+    {
+        puzzle3DefaultColor = new Color(0.32f, 0.28f, 0.55f, 1f);
+    }
+
+
+
+    #endregion
 }

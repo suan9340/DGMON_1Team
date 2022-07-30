@@ -12,5 +12,6 @@ public class ConstantManager
 
     public const string TAG_PLAYER = "Player";
     public const string TAG_PZ1 = "PUZZLE1";
+    public const string TAG_PZ3 = "PUZZLE3";
     public const string TAG_STAR = "StarPoint";
 }
