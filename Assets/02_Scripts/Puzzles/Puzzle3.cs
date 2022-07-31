@@ -15,10 +15,11 @@ public class Puzzle3 : MonoBehaviour
     public float rotSpeed = 100f;
 
     [Header("체크할 콜라이더박스")]
-    public BoxCollider boxCol;
+    public GameObject boxCol;
 
     public bool isDefaultObject = false;
     private bool isStop = false;
+    private bool isCollsion = false;
 
     private string tag_Player = ConstantManager.TAG_PLAYER;
     private string tag_Puzzle3 = ConstantManager.TAG_PZ3;
@@ -47,14 +48,26 @@ public class Puzzle3 : MonoBehaviour
     {
         if (collision.collider.CompareTag(tag_Player))
         {
+            if (isCollsion) return;
+            isCollsion = true;
+
             isStop = !isStop;
-            if (isStop) boxCol.enabled = true;
-            else boxCol.enabled = false;
+            if (isStop) boxCol.SetActive(true);
+            else boxCol.SetActive(false);
 
         }
-        if (collision.collider.CompareTag(tag_Puzzle3))
+        //if (collision.collider.CompareTag(tag_Puzzle3))
+        //{
+        //    Debug.Log("d으아아ㅏㄱ");
+        //} 
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.collider.CompareTag(tag_Player))
         {
-            Debug.Log("d으아아ㅏㄱ");
+            //Debug.Log("나갔어");
+            isCollsion = false;
         }
     }
 }
