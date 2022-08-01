@@ -7,4 +7,5 @@ public class PlayerData : ScriptableObject
 {
     public float sensivity;
     public int starCnt;
+    public bool isClear0;
 }

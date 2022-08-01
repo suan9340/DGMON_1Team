@@ -157,6 +157,8 @@ namespace StarterAssets
 
         private void Update()
         {
+            if (GameManager.Instance.gameState == GameState.isSetting) return;
+
             _hasAnimator = TryGetComponent(out _animator);
 
             JumpAndGravity();
@@ -166,6 +168,7 @@ namespace StarterAssets
 
         private void LateUpdate()
         {
+            if (GameManager.Instance.gameState == GameState.isSetting) return;
             CameraRotation();
         }
 
@@ -285,13 +288,23 @@ namespace StarterAssets
 
                 if (_input.jump && _jumpTimeoutDelta <= 0.0f)
                 {
-                    Debug.Log("Jump!");
-                    _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
-
-                    if (_hasAnimator)
+                    if(playerData.isClear0)
                     {
-                        _animator.SetBool(_animIDJump, true);
+                        Debug.Log("Jump!");
+                        _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+
+                        if (_hasAnimator)
+                        {
+                            _animator.SetBool(_animIDJump, true);
+                        }
                     }
+                    else
+                    {
+                        Debug.Log("점프 못해");
+                        UIManager.Instance.Puzzle0DonClear();
+                        _input.jump = false;
+                    }
+                   
                 }
 
                 if (_jumpTimeoutDelta >= 0.0f)

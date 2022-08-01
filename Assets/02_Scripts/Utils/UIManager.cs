@@ -44,11 +44,17 @@ public class UIManager : MonoBehaviour
     [Header("감도조절 슬라이더")]
     public Slider sensitivitySlider = null;
 
+    [Header("------스킬 게임오브젝트------")]
+    public Image puzzle0_DonClearImage = null;
+    public Text puzzle0_DonClearText = null;
+
+    private bool isShowDonJump = false;
     private bool isSettingChang = false;
 
     private PlayerData playerData;
 
-    private readonly WaitForSeconds starEatScreenDelay = new WaitForSeconds(0.3f);
+    private readonly WaitForSeconds starEatScreenDelay = new WaitForSeconds(0.5f);
+    private readonly WaitForSeconds showcantJumpDelay = new WaitForSeconds(0.8f);
 
     private void Awake()
     {
@@ -83,14 +89,14 @@ public class UIManager : MonoBehaviour
             GameManager.Instance.SetGameState(GameState.isSetting);
             bigSetChang.transform.DOScaleY(1f, 0.15f).SetUpdate(true);
 
-            Time.timeScale = 0f;
+            //Time.timeScale = 0f;
         }
         else
         {
             GameManager.Instance.SetGameState(GameState.isPlaying);
             bigSetChang.transform.DOScaleY(0f, 0.15f).SetUpdate(true).OnComplete(() => { bigSetChang.gameObject.SetActive(false); });
 
-            Time.timeScale = 1f;
+            //Time.timeScale = 1f;
         }
     }
 
@@ -141,5 +147,33 @@ public class UIManager : MonoBehaviour
     public void OnClickSensivitivy()
     {
 
+    }
+
+    public void Puzzle0DonClear()
+    {
+        if (isShowDonJump) return;
+        isShowDonJump = true;
+
+        StartCoroutine(FadeImage());
+    }
+
+    private IEnumerator FadeImage()
+    {
+        var delayTime = 0.7f;
+        puzzle0_DonClearImage.gameObject.SetActive(true);
+        puzzle0_DonClearText.DOFade(1f, delayTime);
+        puzzle0_DonClearImage.DOFade(0.6f, delayTime);
+
+        yield return showcantJumpDelay;
+
+        puzzle0_DonClearImage.DOFade(0f, delayTime);
+        puzzle0_DonClearText.DOFade(0f, delayTime);
+
+        yield return new WaitForSeconds(1f);
+
+        puzzle0_DonClearImage.gameObject.SetActive(false);
+        isShowDonJump = false;
+
+        yield return null;
     }
 }

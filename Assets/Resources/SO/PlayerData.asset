@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   sensivity: 8
-  starCnt: 3
+  starCnt: 0
+  isClear0: 0
