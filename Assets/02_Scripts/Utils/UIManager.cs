@@ -76,9 +76,8 @@ public class UIManager : MonoBehaviour
             SettingChangSet();
         }
 
-        if (Input.GetKeyDown(KeyCode.F2) && isGetnewSkill)
+        if (Input.GetKeyDown(KeyCode.F) && isGetnewSkill)
         {
-            Debug.Log("ENTER");
             isGetnewSkill = false;
         }
     }

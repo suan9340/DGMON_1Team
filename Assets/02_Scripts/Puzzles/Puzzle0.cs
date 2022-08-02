@@ -22,6 +22,10 @@ public class Puzzle0 : MonoBehaviour
     public Camera cinemacineCam = null;
     public Camera mainCam = null;
 
+
+    [Header("오디오 소스")]
+    public AudioSource audio = null;
+
     private bool isStayCollider = false;
     private string tag_Player = ConstantManager.TAG_PLAYER;
 
@@ -50,6 +54,8 @@ public class Puzzle0 : MonoBehaviour
     {
         if (other.CompareTag(tag_Player))
         {
+            if (playerData.isClear0) return;
+
             if (isStayCollider) return;
 
             isStayCollider = true;
@@ -77,6 +83,8 @@ public class Puzzle0 : MonoBehaviour
 
     private void StartStay()
     {
+        audio.volume = PlayerPrefs.GetFloat(ConstantManager.VOL_BGM, 1f);
+
         GameManager.Instance.SetGameState(GameState.isSetting);
         mainCam.gameObject.SetActive(false);
         playerDire.Play();

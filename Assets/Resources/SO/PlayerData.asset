@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensivity: 8
   starCnt: 0
-  isClear0: 0
+  isClear0: 1
