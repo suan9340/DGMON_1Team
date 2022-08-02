@@ -48,13 +48,16 @@ public class UIManager : MonoBehaviour
     public Image puzzle0_DonClearImage = null;
     public Text puzzle0_DonClearText = null;
 
+    [Header("------기도 위험 게임오브젝트------")]
+    public Image stayWarningImage = null;
+    public Text stayWarningText = null;
+
     private bool isShowDonJump = false;
     private bool isSettingChang = false;
 
     private PlayerData playerData;
 
     private readonly WaitForSeconds starEatScreenDelay = new WaitForSeconds(0.5f);
-    private readonly WaitForSeconds showcantJumpDelay = new WaitForSeconds(0.8f);
 
     private void Awake()
     {
@@ -154,24 +157,39 @@ public class UIManager : MonoBehaviour
         if (isShowDonJump) return;
         isShowDonJump = true;
 
-        StartCoroutine(FadeImage());
+        StartCoroutine(FadeImage(puzzle0_DonClearImage, puzzle0_DonClearText, 0.8f, 0.3f));
     }
 
-    private IEnumerator FadeImage()
+    public void StayWarning()
     {
-        var delayTime = 0.7f;
-        puzzle0_DonClearImage.gameObject.SetActive(true);
-        puzzle0_DonClearText.DOFade(1f, delayTime);
-        puzzle0_DonClearImage.DOFade(0.6f, delayTime);
+        StartCoroutine(FadeImage(stayWarningImage, stayWarningText, 1.4f, 0.6f));
+    }
 
-        yield return showcantJumpDelay;
+    /// <summary>
+    /// 이미지랑 텍스트 페이드인,아웃 해주는거
+    /// 1. 타겟 이미지, 2. 타겟 텍스트, 3. 표시될 시간, 4. 알파 값
+    /// </summary>
+    /// <param name="_image"></param>
+    /// <param name="_text"></param>
+    /// <param name="_delayTime"></param>
+    /// <param name="_alpha"></param>
+    /// <returns></returns>
+    public IEnumerator FadeImage(Image _image, Text _text, float _delayTime, float _alpha)
+    {
+        float fadeTime = 0.5f;
 
-        puzzle0_DonClearImage.DOFade(0f, delayTime);
-        puzzle0_DonClearText.DOFade(0f, delayTime);
+        _image.gameObject.SetActive(true);
+        _text.DOFade(1f, fadeTime);
+        _image.DOFade(_alpha, fadeTime);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(_delayTime);
 
-        puzzle0_DonClearImage.gameObject.SetActive(false);
+        _image.DOFade(0f, fadeTime);
+        _text.DOFade(0f, fadeTime);
+
+        yield return new WaitForSeconds(fadeTime);
+
+        _image.gameObject.SetActive(false);
         isShowDonJump = false;
 
         yield return null;
