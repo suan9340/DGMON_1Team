@@ -52,8 +52,13 @@ public class UIManager : MonoBehaviour
     public Image stayWarningImage = null;
     public Text stayWarningText = null;
 
+    [Header("------기도 성공 게임오브젝트------")]
+    public Image staySuccessImage = null;
+    public Text[] staySucessText = null;
+
     private bool isShowDonJump = false;
     private bool isSettingChang = false;
+    private bool isGetnewSkill = false;
 
     private PlayerData playerData;
 
@@ -69,6 +74,12 @@ public class UIManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SettingChangSet();
+        }
+
+        if (Input.GetKeyDown(KeyCode.F2) && isGetnewSkill)
+        {
+            Debug.Log("ENTER");
+            isGetnewSkill = false;
         }
     }
 
@@ -165,6 +176,12 @@ public class UIManager : MonoBehaviour
         StartCoroutine(FadeImage(stayWarningImage, stayWarningText, 1.4f, 0.6f));
     }
 
+    public void StaySucessful()
+    {
+        isGetnewSkill = true;
+        StartCoroutine(Fade2Image(staySuccessImage, staySucessText[0], staySucessText[1], 0.4f, 0.9f));
+    }
+
     /// <summary>
     /// 이미지랑 텍스트 페이드인,아웃 해주는거
     /// 1. 타겟 이미지, 2. 타겟 텍스트, 3. 표시될 시간, 4. 알파 값
@@ -192,6 +209,38 @@ public class UIManager : MonoBehaviour
         _image.gameObject.SetActive(false);
         isShowDonJump = false;
 
+        yield return null;
+    }
+
+    /// <summary>
+    /// 이미지랑 텍스트 페이드 인아웃인데 이건 스킬 얻었을 때 사용하는 함수
+    /// 1. 타겟 이미지, 2,3. 타겟 텍스트들, 4. 이미지 알파값, 5. 텍스트 알파값
+    /// </summary>
+    /// <param name="_image"></param>
+    /// <param name="_text"></param>
+    /// <param name="_delayTime"></param>
+    /// <param name="_alphaim"></param>
+    /// <returns></returns>
+    public IEnumerator Fade2Image(Image _image, Text _text, Text _text2, float _alphaim, float _alphaTt)
+    {
+        float fadeTime = 0.5f;
+
+        _image.gameObject.SetActive(true);
+        _text.DOFade(_alphaTt, fadeTime);
+        _text2.DOFade(_alphaTt, fadeTime);
+        _image.DOFade(_alphaim, fadeTime);
+
+        while (isGetnewSkill) yield return null;
+
+        _image.DOFade(0f, fadeTime);
+        _text.DOFade(0f, fadeTime);
+        _text2.DOFade(0f, fadeTime);
+
+        yield return new WaitForSeconds(fadeTime);
+
+        _image.gameObject.SetActive(false);
+        isShowDonJump = false;
+        GameManager.Instance.SetGameState(GameState.isPlaying);
         yield return null;
     }
 }

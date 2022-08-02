@@ -18,6 +18,10 @@ public class Puzzle0 : MonoBehaviour
     [Header("시네머신")]
     public PlayableDirector playerDire;
 
+    [Header("시네머신 카메라와 메인 카메라")]
+    public Camera cinemacineCam = null;
+    public Camera mainCam = null;
+
     private bool isStayCollider = false;
     private string tag_Player = ConstantManager.TAG_PLAYER;
 
@@ -31,18 +35,15 @@ public class Puzzle0 : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F1))
-            playerDire.Play();
+        {
+            StartStay();
+        }
     }
 
     public void ConnectData()
     {
         const string SAVE_PATH = "SO/";
         playerData = Resources.Load<PlayerData>(SAVE_PATH + "PlayerData");
-    }
-
-    private void ShowFireLight()
-    {
-        lightBig.Play();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -60,15 +61,7 @@ public class Puzzle0 : MonoBehaviour
             }
             else
             {
-                Debug.Log("qweqew");
-                playerData.isClear0 = true;
-
-                ShowFireLight();
-
-                door.gameObject.SetActive(false);
-                playerData.starCnt = 0;
-
-                UIManager.Instance.UpdateStarUI();
+                StartStay();
             }
 
         }
@@ -80,5 +73,25 @@ public class Puzzle0 : MonoBehaviour
         {
             isStayCollider = false;
         }
+    }
+
+    private void StartStay()
+    {
+        GameManager.Instance.SetGameState(GameState.isSetting);
+        mainCam.gameObject.SetActive(false);
+        playerDire.Play();
+        playerData.isClear0 = true;
+        playerData.starCnt = 0;
+        UIManager.Instance.UpdateStarUI();
+
+        door.gameObject.SetActive(false);
+    }
+
+    public void TimeLineEnd()
+    {
+        cinemacineCam.gameObject.SetActive(false);
+        mainCam.gameObject.SetActive(true);
+
+        UIManager.Instance.StaySucessful();
     }
 }
