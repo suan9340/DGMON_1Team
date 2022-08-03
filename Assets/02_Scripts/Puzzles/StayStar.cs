@@ -60,16 +60,15 @@ public class StayStar : MonoBehaviour
 
             isStayCollider = true;
 
-            if (playerData.starCnt == 0)
+            if(playerData.starCnt == 2)
+            {
+                StartStay();
+            }
+            else
             {
                 UIManager.Instance.StayWarning();
                 Debug.Log("´Ù½Ã¿Í");
             }
-            else
-            {
-                StartStay();
-            }
-
         }
     }
 

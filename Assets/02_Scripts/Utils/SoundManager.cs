@@ -149,10 +149,23 @@ public class SoundManager : MonoBehaviour
         FX2Audio.clip = VFXInfo[3].clip;
         FX2Audio.Play();
     }
+    
 
+    /// <summary>
+    /// 버튼 클릭했을 때 효과음
+    /// </summary>
     public void Sound_ButtonClick()
     {
         FX3Audio.clip = VFXInfo[4].clip;
         FX3Audio.Play();
+    }
+
+    /// <summary>
+    /// 새로운 기술 얻었을 때 효과음
+    /// </summary>
+    public void Sound_GetNewAblilty()
+    {
+        FX2Audio.clip = VFXInfo[5].clip;
+        FX2Audio.Play();
     }
 }

@@ -38,7 +38,7 @@ public class TuTorialManager : MonoBehaviour
     private void Start()
     {
         SoundManager.Instance.Sound_TutoBGM();
-
+        UIManager.Instance.SettingTexts(0);
         SetDefaultColor();
     }
 

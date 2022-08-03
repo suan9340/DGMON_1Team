@@ -67,6 +67,7 @@ public class UIManager : MonoBehaviour
     public Image staySuccessImage = null;
     public Text[] staySucessText = null;
 
+
     private bool isShowDonJump = false;
     private bool isSettingChang = false;
     private bool isGetnewSkill = false;
@@ -92,6 +93,11 @@ public class UIManager : MonoBehaviour
             isGetnewSkill = false;
         }
     }
+
+
+    /// <summary>
+    /// 설청창이나 그런거 켯을 때 애니메이션 멈추도록
+    /// </summary>
 
     public void ConnectData()
     {
@@ -234,7 +240,7 @@ public class UIManager : MonoBehaviour
     public IEnumerator Fade2Image(Image _image, Text _text, Text _text2, float _alphaim, float _alphaTt)
     {
         float fadeTime = 0.5f;
-
+        SoundManager.Instance.Sound_GetNewAblilty();
         _image.gameObject.SetActive(true);
         _text.DOFade(_alphaTt, fadeTime);
         _text2.DOFade(_alphaTt, fadeTime);
@@ -254,10 +260,12 @@ public class UIManager : MonoBehaviour
         yield return null;
     }
 
-    public void SettingTexts(Text _stayTxt, Text _cantabl, Text _getabl, int _nums)
+    public void SettingTexts(int _nums)
     {
         stayWarningText.text = setText[_nums].staytext;
         puzzle0_DonClearText.text = setText[_nums].cant_abilitytext;
         staySucessText[0].text = setText[_nums].get_abilitytext;
     }
+
+
 }
