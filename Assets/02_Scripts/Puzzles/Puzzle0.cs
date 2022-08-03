@@ -83,9 +83,11 @@ public class Puzzle0 : MonoBehaviour
 
     private void StartStay()
     {
+        SoundManager.Instance.BgmAudio.Stop();
         audio.volume = PlayerPrefs.GetFloat(ConstantManager.VOL_BGM, 1f);
 
         GameManager.Instance.SetGameState(GameState.isSetting);
+        cinemacineCam.gameObject.SetActive(true);
         mainCam.gameObject.SetActive(false);
         playerDire.Play();
         playerData.isClear0 = true;
@@ -97,6 +99,7 @@ public class Puzzle0 : MonoBehaviour
 
     public void TimeLineEnd()
     {
+        SoundManager.Instance.BgmAudio.Play();
         cinemacineCam.gameObject.SetActive(false);
         mainCam.gameObject.SetActive(true);
 
