@@ -5,6 +5,15 @@ using DG.Tweening;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+[System.Serializable]
+public class SettingText
+{
+    public string title;
+    public string staytext;
+    public string cant_abilitytext;
+    public string get_abilitytext;
+}
+
 public class UIManager : MonoBehaviour
 {
     #region SingleTon
@@ -27,6 +36,8 @@ public class UIManager : MonoBehaviour
     }
 
     #endregion
+
+    public List<SettingText> setText = new List<SettingText>();
 
     [Header("------UI 게임오브젝트------")]
     [Tooltip("큰 설정창")] public Image bigSetChang = null;
@@ -76,7 +87,7 @@ public class UIManager : MonoBehaviour
             SettingChangSet();
         }
 
-        if (Input.GetKeyDown(KeyCode.F) && isGetnewSkill)
+        if (Input.GetKeyDown(KeyCode.Space) && isGetnewSkill)
         {
             isGetnewSkill = false;
         }
@@ -241,5 +252,12 @@ public class UIManager : MonoBehaviour
         isShowDonJump = false;
         GameManager.Instance.SetGameState(GameState.isPlaying);
         yield return null;
+    }
+
+    public void SettingTexts(Text _stayTxt, Text _cantabl, Text _getabl, int _nums)
+    {
+        stayWarningText.text = setText[_nums].staytext;
+        puzzle0_DonClearText.text = setText[_nums].cant_abilitytext;
+        staySucessText[0].text = setText[_nums].get_abilitytext;
     }
 }
