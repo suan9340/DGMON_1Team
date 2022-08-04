@@ -12,14 +12,15 @@ public class Puzzle4 : MonoBehaviour
 
     private void Start()
     {
-        sound_Vol = PlayerPrefs.GetFloat(ConstantManager.VOL_VFX, 1f);
+        sound_Vol = PlayerPrefs.GetFloat(ConstantManager.VOL_VFX);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag(tag_Player))
         {
-            Debug.Log("qwe");
+            sound_Vol = PlayerPrefs.GetFloat(ConstantManager.VOL_VFX);
+            Debug.Log(sound_Vol);
             AudioSource.PlayClipAtPoint(soundBlock, transform.position, sound_Vol);
         }
     }
