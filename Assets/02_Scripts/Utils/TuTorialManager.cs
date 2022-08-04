@@ -57,7 +57,11 @@ public class TuTorialManager : MonoBehaviour
         }
 
         if (cnt == isDone.Count)
+        {
+            SoundManager.Instance.Sound_MainBGM();
+            UIManager.Instance.SettingTexts(1);
             MoveDoor();
+        }
     }
 
     /// <summary>

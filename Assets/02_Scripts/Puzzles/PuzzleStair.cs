@@ -55,6 +55,7 @@ public class PuzzleStair : MonoBehaviour
             CheckStairNum(true);
 
             TuTorialManager.Instance.CheckOpenDoor();
+            
         }
         else
             CheckStairNum(false);
@@ -90,7 +91,7 @@ public class PuzzleStair : MonoBehaviour
                 TuTorialManager.Instance.isDone[5] = isA;
                 break;
         }
-    }
+    }   
 
     private void UpdateStairColor()
     {

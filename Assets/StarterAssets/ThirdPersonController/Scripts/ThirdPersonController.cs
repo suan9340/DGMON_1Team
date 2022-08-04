@@ -290,7 +290,7 @@ namespace StarterAssets
                 {
                     if(playerData.isClear0)
                     {
-                        Debug.Log("Jump!");
+                        //Debug.Log("Jump!");
                         _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
 
                         if (_hasAnimator)

@@ -9,10 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94a663f14f315364481ec2d896481d49, type: 3}
-  m_Name: PlayerData
+  m_Script: {fileID: 11500000, guid: d6fa2d92fc1b3f34da284357edf89c3b, type: 3}
+  m_Name: New Signal2
   m_EditorClassIdentifier: 
-  sensivity: 8
-  starCnt: 0
-  needStars: 0200000007000000
-  isClear0: 1
