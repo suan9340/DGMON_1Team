@@ -26,27 +26,43 @@ public class TuTorialManager : MonoBehaviour
 
     #endregion
 
+    private PlayerData playerData;
+
     [HideInInspector] public List<bool> isDone = new List<bool>();
     public GameObject puzzleClearDoor = null;
 
     public ParticleSystem cleareffect = null;
     int cnt = 0;
 
-    //-------------------------------------------------------------------//
-
-    public Color puzzle3DefaultColor;
 
     //-------------------------------------------------------------------//
 
-    public List<bool> isSound = new List<bool>();
-    public List<GameObject> soundObj = new List<GameObject>();
+    [Header("소리블럭 오브젝트와 불리언")]
+    [HideInInspector] public List<bool> isSound = new List<bool>();
+    [HideInInspector] public List<GameObject> soundObj = new List<GameObject>();
+
+    [Header("소리블럭 클리어 했는지 확인")]
     public bool isClear_sound = false;
+
+    [Header("클리어했을 때 별과 문 상호작용 오브젝트")]
+    public ParticleSystem stat5 = null;
+    public GameObject door = null;
 
     private void Start()
     {
+        ConnectData();
+
         SoundManager.Instance.Sound_TutoBGM();
         UIManager.Instance.SettingTexts(0);
-        SetDefaultColor();
+
+        playerData.starCnt = 0;
+        playerData.isClear0 = false;
+    }
+
+    public void ConnectData()
+    {
+        const string SAVE_PATH = "SO/";
+        playerData = Resources.Load<PlayerData>(SAVE_PATH + "PlayerData");
     }
 
     #region Puzzle 1 Fuctions
@@ -82,16 +98,6 @@ public class TuTorialManager : MonoBehaviour
     }
     #endregion
 
-    #region Puzzle 2 Functions
-
-    private void SetDefaultColor()
-    {
-        puzzle3DefaultColor = new Color(0.32f, 0.28f, 0.55f, 1f);
-    }
-
-
-
-    #endregion
 
     #region Puzzle 4
 
@@ -99,6 +105,13 @@ public class TuTorialManager : MonoBehaviour
     {
         for (int i = 0; i < isSound.Count; i++)
             isSound[i] = false;
+    }
+
+    public void ClearPuzzle4()
+    {
+        door.gameObject.SetActive(false);
+        stat5.gameObject.SetActive(true);
+        isClear_sound = true;
     }
 
     #endregion

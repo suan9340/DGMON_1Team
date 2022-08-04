@@ -57,11 +57,7 @@ public class Puzzle4 : MonoBehaviour
 
             Reset_All_SoundBlockColor();
             material.color = c;
-            if (num == 7)
-            {
-                Debug.Log("성공성공");
-                TuTorialManager.Instance.isClear_sound = true;
-            }
+
         }
         else
         {
@@ -70,6 +66,12 @@ public class Puzzle4 : MonoBehaviour
                 TuTorialManager.Instance.isSound[num] = true;
 
                 material.color = c;
+
+                if (num == 7)
+                {
+                    SoundManager.Instance.Sound_Stair_Hint();
+                    TuTorialManager.Instance.ClearPuzzle4();
+                }
             }
             else
             {
