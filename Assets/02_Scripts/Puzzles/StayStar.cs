@@ -115,9 +115,4 @@ public class StayStar : MonoBehaviour
 
         UIManager.Instance.StaySucessful();
     }
-
-    public  void JJKJKJK()
-    {
-        Debug.Log("TimeLineEnd");
-    }
 }
