@@ -31,9 +31,16 @@ public class TuTorialManager : MonoBehaviour
 
     public ParticleSystem cleareffect = null;
     int cnt = 0;
+
     //-------------------------------------------------------------------//
 
     public Color puzzle3DefaultColor;
+
+    //-------------------------------------------------------------------//
+
+    public List<bool> isSound = new List<bool>();
+    public List<GameObject> soundObj = new List<GameObject>();
+    public bool isClear_sound = false;
 
     private void Start()
     {
@@ -83,6 +90,16 @@ public class TuTorialManager : MonoBehaviour
     }
 
 
+
+    #endregion
+
+    #region Puzzle 4
+
+    public void ResetBoolenSound()
+    {
+        for (int i = 0; i < isSound.Count; i++)
+            isSound[i] = false;
+    }
 
     #endregion
 }
