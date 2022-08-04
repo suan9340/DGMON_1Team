@@ -16,7 +16,7 @@ public class StayStar : MonoBehaviour
     public ParticleSystem lightbeforeEffect = null;
 
     [Header("시네머신")]
-    public PlayableDirector playerDire;
+    public PlayableDirector[] playerDire;
 
     [Header("시네머신 카메라와 메인 카메라")]
     public Camera cinemacineCam = null;
@@ -24,9 +24,14 @@ public class StayStar : MonoBehaviour
 
 
     [Header("오디오 소스")]
-    public AudioSource audio = null;
+    public new AudioSource audio = null;
+
+    [Header("기도원 순서")]
+    public int num = 0;
 
     private bool isStayCollider = false;
+    public bool isStaySucess = false;
+
     private string tag_Player = ConstantManager.TAG_PLAYER;
 
     private PlayerData playerData;
@@ -54,15 +59,15 @@ public class StayStar : MonoBehaviour
     {
         if (other.CompareTag(tag_Player))
         {
-            if (playerData.isClear0) return;
+            if (isStaySucess) return;
 
             if (isStayCollider) return;
 
             isStayCollider = true;
 
-            if(playerData.starCnt == 2)
+            if (playerData.starCnt >= playerData.needStars[num])
             {
-                StartStay();
+                StartStay();    
             }
             else
             {
@@ -86,10 +91,14 @@ public class StayStar : MonoBehaviour
         audio.volume = PlayerPrefs.GetFloat(ConstantManager.VOL_BGM, 1f);
 
         GameManager.Instance.SetGameState(GameState.isSetting);
+
         cinemacineCam.gameObject.SetActive(true);
         mainCam.gameObject.SetActive(false);
-        playerDire.Play();
+        playerDire[num].Play();
+
         playerData.isClear0 = true;
+        isStaySucess = true;
+
         playerData.starCnt = 0;
         UIManager.Instance.UpdateStarUI();
 
@@ -99,10 +108,16 @@ public class StayStar : MonoBehaviour
 
     public void TimeLineEnd()
     {
+        Debug.Log("TimeLineEnd");
         SoundManager.Instance.BgmAudio.Play();
         cinemacineCam.gameObject.SetActive(false);
         mainCam.gameObject.SetActive(true);
 
         UIManager.Instance.StaySucessful();
+    }
+
+    public  void JJKJKJK()
+    {
+        Debug.Log("TimeLineEnd");
     }
 }

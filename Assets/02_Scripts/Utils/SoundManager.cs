@@ -111,6 +111,12 @@ public class SoundManager : MonoBehaviour
         BgmAudio.Play();
     }
 
+    public void Sound_MainBGM()
+    {
+        BgmAudio.clip = BGMInfo[1].clip;
+        BgmAudio.Play();
+    }
+
     /// <summary>
     /// 점프 효과음
     /// </summary>
