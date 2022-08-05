@@ -29,12 +29,16 @@ public class StayStar : MonoBehaviour
     [Header("기도원 순서")]
     public int num = 0;
 
+    private float bgmvol;
+
     private bool isStayCollider = false;
     public bool isStaySucess = false;
 
     private string tag_Player = ConstantManager.TAG_PLAYER;
 
     private PlayerData playerData;
+
+    private readonly WaitForSeconds soundDelay = new WaitForSeconds(0.1f);
 
     private void Start()
     {
@@ -87,8 +91,7 @@ public class StayStar : MonoBehaviour
 
     private void StartStay()
     {
-        SoundManager.Instance.BgmAudio.Stop();
-        audio.volume = PlayerPrefs.GetFloat(ConstantManager.VOL_BGM, 1f);
+        SetBGM();
 
         GameManager.Instance.SetGameState(GameState.isSetting);
 
@@ -110,7 +113,8 @@ public class StayStar : MonoBehaviour
     {
         Debug.Log("TimeLineEnd");
 
-        SoundManager.Instance.BgmAudio.Play();
+        SoundManager.Instance.BgmAudio.UnPause();
+
         cinemacineCam.gameObject.SetActive(false);
         mainCam.gameObject.SetActive(true);
 
@@ -118,5 +122,32 @@ public class StayStar : MonoBehaviour
 
         lightBig.gameObject.SetActive(true);
         lightBig.Play();
+    }
+
+    private void SetBGM()
+    {
+        bgmvol = PlayerPrefs.GetFloat(ConstantManager.VOL_BGM, 1f);
+
+        SoundManager.Instance.BgmAudio.Pause();
+
+        StartCoroutine(FadeInSound());
+    }
+
+    private IEnumerator FadeInSound()
+    {
+        audio.volume = 0f;
+        while (true)
+        {
+            if (audio.volume < bgmvol)
+            {
+                audio.volume += 0.03f;
+                yield return soundDelay;
+            }
+            else
+            {
+                audio.volume = bgmvol;
+                yield break;
+            }
+        }
     }
 }

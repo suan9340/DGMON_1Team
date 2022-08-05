@@ -63,6 +63,8 @@ public class SoundManager : MonoBehaviour
     // Set String 
     private string VOL_BGM = ConstantManager.VOL_BGM;
     private string VOL_VFX = ConstantManager.VOL_VFX;
+
+    private readonly WaitForSeconds sound_delay = new WaitForSeconds(0.1f);
     private void Start()
     {
         SettingVolume();
@@ -109,12 +111,17 @@ public class SoundManager : MonoBehaviour
     {
         BgmAudio.clip = BGMInfo[0].clip;
         BgmAudio.Play();
+        StartCoroutine(FadeInSound(BgmAudio, 0.03f, bgmVol));
     }
 
+    /// <summary>
+    /// 메인 BGM
+    /// </summary>
     public void Sound_MainBGM()
     {
         BgmAudio.clip = BGMInfo[1].clip;
         BgmAudio.Play();
+        StartCoroutine(FadeInSound(BgmAudio, 0.03f, bgmVol));
     }
 
     /// <summary>
@@ -155,7 +162,7 @@ public class SoundManager : MonoBehaviour
         FX2Audio.clip = VFXInfo[3].clip;
         FX2Audio.Play();
     }
-    
+
 
     /// <summary>
     /// 버튼 클릭했을 때 효과음
@@ -173,5 +180,31 @@ public class SoundManager : MonoBehaviour
     {
         FX2Audio.clip = VFXInfo[5].clip;
         FX2Audio.Play();
+    }
+
+    /// <summary>
+    /// 음악 페이드 인 효과
+    /// 1. 오디오 소스  2. 증가시킬 정도   3. 최대볼륨
+    /// </summary>
+    /// <param name="_audio"></param>
+    /// <param name="_upValue"></param>
+    /// <param name="_maxSound"></param>
+    /// <returns></returns>
+    public IEnumerator FadeInSound(AudioSource _audio, float _upValue, float _maxSound)
+    {
+        _audio.volume = 0f;
+        while (true)
+        {
+            if (_audio.volume < _maxSound)
+            {
+                _audio.volume += _upValue;
+                yield return sound_delay;
+            }
+            else
+            {
+                _audio.volume = _maxSound;
+                yield break;
+            }
+        }
     }
 }
