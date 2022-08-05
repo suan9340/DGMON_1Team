@@ -13,6 +13,9 @@
 > 박성빈(개발, 기획)   
 > 박부성(메인기획)   
 ---    
+### 구글 드라이브 링크
+> https://drive.google.com/drive/folders/1wiEVPTuCHmaWrrPR6rhnPDMde4N_xz0M?usp=sharing
+---   
 - 게임 초반 일부 스킬들을 사용하지 못하는 모습   
 ![image](https://user-images.githubusercontent.com/77601060/182989338-d009403e-0402-4fe4-80ac-8ea3025c0c6a.png)    
   
