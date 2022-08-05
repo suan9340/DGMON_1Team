@@ -65,7 +65,7 @@ public class SoundManager : MonoBehaviour
     private string VOL_VFX = ConstantManager.VOL_VFX;
 
     private readonly WaitForSeconds sound_delay = new WaitForSeconds(0.1f);
-    private void Start()
+    private void Awake()
     {
         SettingVolume();
     }

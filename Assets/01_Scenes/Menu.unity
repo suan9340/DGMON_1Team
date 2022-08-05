@@ -2604,7 +2604,7 @@ MonoBehaviour:
   - name: 
     clip: {fileID: 0}
   - name: "\uBC84\uD2BC \uD074\uB9AD \uC18C\uB9AC"
-    clip: {fileID: 8300000, guid: ae52f59151cf7f94c82bb0c61d74faf7, type: 3}
+    clip: {fileID: 8300000, guid: 2125c0d2a985bd34984f9fb1418f8c71, type: 3}
   BgmAudio: {fileID: 1725618758}
   FXAudio: {fileID: 408324776}
   FX2Audio: {fileID: 408324776}
