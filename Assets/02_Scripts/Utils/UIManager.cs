@@ -88,7 +88,7 @@ public class UIManager : MonoBehaviour
             SettingChangSet();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGetnewSkill)
+        if (Input.GetKeyDown(KeyCode.Tab) && isGetnewSkill)
         {
             isGetnewSkill = false;
         }

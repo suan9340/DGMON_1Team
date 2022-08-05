@@ -157,7 +157,15 @@ namespace StarterAssets
 
         private void Update()
         {
-            if (GameManager.Instance.gameState == GameState.isSetting) return;
+            if (GameManager.Instance.gameState == GameState.isSetting)
+            {
+                _animator.speed = 0f;
+                return;
+            }
+            else if (_animator.speed != 1f)
+            {
+                _animator.speed = 1f;
+            }
 
             _hasAnimator = TryGetComponent(out _animator);
 
@@ -288,7 +296,7 @@ namespace StarterAssets
 
                 if (_input.jump && _jumpTimeoutDelta <= 0.0f)
                 {
-                    if(playerData.isClear0)
+                    if (playerData.isClear0)
                     {
                         //Debug.Log("Jump!");
                         _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
@@ -304,7 +312,7 @@ namespace StarterAssets
                         UIManager.Instance.Puzzle0DonClear();
                         _input.jump = false;
                     }
-                   
+
                 }
 
                 if (_jumpTimeoutDelta >= 0.0f)
@@ -366,7 +374,7 @@ namespace StarterAssets
                     var index = Random.Range(0, FootstepAudioClips.Length);
                     SettingVFXSoundWithSoundManager();
 
-                   
+
                     AudioSource.PlayClipAtPoint(FootstepAudioClips[index], transform.TransformPoint(_controller.center), FootstepAudioVolume);
                 }
             }
@@ -390,6 +398,6 @@ namespace StarterAssets
 
         }
 
-       
+
     }
 }

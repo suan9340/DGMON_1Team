@@ -67,7 +67,7 @@ public class StayStar : MonoBehaviour
 
             if (playerData.starCnt >= playerData.needStars[num])
             {
-                StartStay();    
+                StartStay();
             }
             else
             {
@@ -109,10 +109,14 @@ public class StayStar : MonoBehaviour
     public void TimeLineEnd()
     {
         Debug.Log("TimeLineEnd");
+
         SoundManager.Instance.BgmAudio.Play();
         cinemacineCam.gameObject.SetActive(false);
         mainCam.gameObject.SetActive(true);
 
         UIManager.Instance.StaySucessful();
+
+        lightBig.gameObject.SetActive(true);
+        lightBig.Play();
     }
 }
