@@ -72,6 +72,9 @@ public class UIManager : MonoBehaviour
     private bool isSettingChang = false;
     private bool isGetnewSkill = false;
 
+    private string SENSITY = ConstantManager.SENS;
+    private float sensvalue;
+
     private PlayerData playerData;
 
     private readonly WaitForSeconds starEatScreenDelay = new WaitForSeconds(0.5f);
@@ -80,6 +83,7 @@ public class UIManager : MonoBehaviour
     {
         ConnectData();
         UpdateStarUI();
+        SettingOpenSens();
     }
     private void Update()
     {
@@ -267,5 +271,20 @@ public class UIManager : MonoBehaviour
         staySucessText[0].text = setText[_nums].get_abilitytext;
     }
 
+    public void SettingSensitivySlider()
+    {
+        //sensitivitySlider
+        sensvalue = sensitivitySlider.value;
+        PlayerPrefs.SetFloat(SENSITY, sensvalue);
 
+        playerData.sensivity = sensvalue * 10f;
+    }
+
+    private void SettingOpenSens()
+    {
+        sensvalue = PlayerPrefs.GetFloat(SENSITY, 0.5f);
+        sensitivitySlider.value = sensvalue;
+
+        playerData.sensivity = sensvalue * 10f;
+    }
 }
