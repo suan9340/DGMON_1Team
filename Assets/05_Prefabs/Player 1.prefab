@@ -7173,11 +7173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterBody: {fileID: 7744251279501708247}
   cameraArm: {fileID: 7744251280096692130}
-  normalSpeed: 8
-  runSpeed: 10
-  walkSpeed: 4
-  sensivity: 4.7
-  jumpPower: 10
+  playerData: {fileID: 0}
   gazeSlider: {fileID: 0}
   gazeSpeed: 0.08
   gazeMinusSpeed: 0.0006
