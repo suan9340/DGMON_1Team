@@ -34,6 +34,11 @@ public class SoundManager : MonoBehaviour
     }
     #endregion
 
+    public enum SoundType
+    {
+
+    }
+
     [SerializeField] private List<AudioInfo> BGMInfo = new List<AudioInfo>();
     [SerializeField] private List<AudioInfo> VFXInfo = new List<AudioInfo>();
 
@@ -52,13 +57,15 @@ public class SoundManager : MonoBehaviour
     public Slider VFXSlider = null;
 
 
-    private float bgmVol = 1f;
-    private float vfxVol = 1f;
+    public float bgmVol;
+    public float vfxVol;
 
     // Set String 
     private string VOL_BGM = ConstantManager.VOL_BGM;
     private string VOL_VFX = ConstantManager.VOL_VFX;
-    private void Start()
+
+    private readonly WaitForSeconds sound_delay = new WaitForSeconds(0.1f);
+    private void Awake()
     {
         SettingVolume();
     }
@@ -104,6 +111,17 @@ public class SoundManager : MonoBehaviour
     {
         BgmAudio.clip = BGMInfo[0].clip;
         BgmAudio.Play();
+        StartCoroutine(FadeInSound(BgmAudio, 0.03f, bgmVol));
+    }
+
+    /// <summary>
+    /// 메인 BGM
+    /// </summary>
+    public void Sound_MainBGM()
+    {
+        BgmAudio.clip = BGMInfo[1].clip;
+        BgmAudio.Play();
+        StartCoroutine(FadeInSound(BgmAudio, 0.03f, bgmVol));
     }
 
     /// <summary>
@@ -145,9 +163,48 @@ public class SoundManager : MonoBehaviour
         FX2Audio.Play();
     }
 
+
+    /// <summary>
+    /// 버튼 클릭했을 때 효과음
+    /// </summary>
     public void Sound_ButtonClick()
     {
         FX3Audio.clip = VFXInfo[4].clip;
         FX3Audio.Play();
+    }
+
+    /// <summary>
+    /// 새로운 기술 얻었을 때 효과음
+    /// </summary>
+    public void Sound_GetNewAblilty()
+    {
+        FX2Audio.clip = VFXInfo[5].clip;
+        FX2Audio.Play();
+    }
+
+    /// <summary>
+    /// 음악 페이드 인 효과
+    /// 1. 오디오 소스  2. 증가시킬 정도   3. 최대볼륨
+    /// </summary>
+    /// <param name="_audio"></param>
+    /// <param name="_upValue"></param>
+    /// <param name="_maxSound"></param>
+    /// <returns></returns>
+    public IEnumerator FadeInSound(AudioSource _audio, float _upValue, float _maxSound)
+    {
+        _audio.volume = 0f;
+        while (true)
+        {
+            if (_audio.volume < _maxSound)
+            {
+                _audio.volume += _upValue;
+                yield return sound_delay;
+            }
+            else
+            {
+                _audio.volume = _maxSound;
+                yield break;
+            }
+        }
     }
 }
