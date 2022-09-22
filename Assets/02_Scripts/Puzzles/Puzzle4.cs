@@ -22,6 +22,7 @@ public class Puzzle4 : MonoBehaviour
     private AudioSource audio = null;
     private Material material = null;
 
+    public bool isStair = false;
     private void Start()
     {
         audio = GetComponent<AudioSource>();
@@ -35,6 +36,12 @@ public class Puzzle4 : MonoBehaviour
         if (collision.collider.CompareTag(tag_Player))
         {
             Sound();
+
+            if (isStair)
+            {
+                material.color = c;
+                return;
+            }
 
             if (TuTorialManager.Instance.isClear_sound) return;
             CheckSound();
