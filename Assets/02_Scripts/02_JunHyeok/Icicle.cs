@@ -20,7 +20,7 @@ public class Icicle : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        mycollider = GetComponent<Collider>();
+        mycollider = GetComponentInChildren<Collider>();
 
         endpos = transform.TransformDirection(Vector3.down);
         startpos = transform.position;
@@ -32,7 +32,7 @@ public class Icicle : MonoBehaviour
     void Update()
     {
         Debug.DrawRay(startpos, endpos * rayLength, Color.blue);
-        //CheckRay();
+        CheckRay();
     }
 
     private void CheckRay()
