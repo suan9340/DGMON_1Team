@@ -13,14 +13,14 @@ public class Icicle : MonoBehaviour
     private Vector3 startpos = Vector3.zero;
 
     private Rigidbody rb;
-    private Collider collider;
+    private Collider mycollider;
 
     private bool isCheckd = true;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        collider = GetComponent<Collider>();
+        mycollider = GetComponent<Collider>();
 
         endpos = transform.TransformDirection(Vector3.down);
         startpos = transform.position;
@@ -31,8 +31,8 @@ public class Icicle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawRay(startpos, endpos * rayLength, Color.red);
-        CheckRay();
+        Debug.DrawRay(startpos, endpos * rayLength, Color.blue);
+        //CheckRay();
     }
 
     private void CheckRay()
@@ -58,7 +58,7 @@ public class Icicle : MonoBehaviour
     {
         gameObject.SetActive(false);
         rb.useGravity = false;
-        collider.gameObject.SetActive(false);
+        mycollider.gameObject.SetActive(false);
 
         Invoke(nameof(SetIce), ResetTime);
     }
@@ -68,6 +68,6 @@ public class Icicle : MonoBehaviour
         rb.isKinematic = false;
         transform.position = startpos;
         gameObject.SetActive(true);
-        collider.gameObject.SetActive(true);
+        mycollider.gameObject.SetActive(true);
     }
 }
