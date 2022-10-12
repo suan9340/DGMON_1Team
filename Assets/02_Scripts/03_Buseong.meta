@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/04_Asset/04_Hovl Studio.meta
+guid: c15ad1f634b51904fae63e2e4a248c8b
+========
 guid: b13b9df40f1fccc4baeee645d123262f
+>>>>>>>> f328991c23c84d0198bb668cac3906e4e9b54af0:Assets/02_Scripts/03_Buseong.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
