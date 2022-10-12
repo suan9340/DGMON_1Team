@@ -18,6 +18,7 @@ public class Icicle : MonoBehaviour
     private Vector3 startpos = Vector3.zero;
 
     private Rigidbody rb;
+    public ConstantForce cf;
     public Collider mycollider;
     public RaycastHit hitinfo;
 
@@ -27,6 +28,7 @@ public class Icicle : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        cf = GetComponent<ConstantForce>();
         mycollider = GetComponentInChildren<Collider>();
 
         endpos = transform.TransformDirection(Vector3.down);
@@ -51,41 +53,43 @@ public class Icicle : MonoBehaviour
         {
             if (isCheckd) return;
 
-            Debug.Log("부딪혔다");
+            //Debug.Log("부딪혔다");
             rb.useGravity = true;
             isCheckd = true;
+
+            cf.enabled = true;
         }
         else
         {
             if (isCheckd == false) return;
-
-            Debug.Log("안 부딪혔다");
+            cf.enabled = false;
+            //Debug.Log("안 부딪혔다");
             isCheckd = false;
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        float spehereScale = Mathf.Max(transform.lossyScale.x, transform.lossyScale.y, transform.lossyScale.z);
-        bool isHit = Physics.SphereCast(startpos, spehereScale / 2f, endpos, out hitinfo, rayLength, layermask);
+    //private void OnDrawGizmos()
+    //{
+    //    float spehereScale = Mathf.Max(transform.lossyScale.x, transform.lossyScale.y, transform.lossyScale.z);
+    //    bool isHit = Physics.SphereCast(startpos, spehereScale / 2f, endpos, out hitinfo, rayLength, layermask);
 
-        Gizmos.color = Color.red;
-        if (isHit)
-        {
-            Gizmos.DrawRay(transform.position, Vector3.down * hitinfo.distance);
-            Gizmos.DrawWireSphere(transform.position + Vector3.down * hitinfo.distance, transform.lossyScale.x / 2);
-        }
-        else
-        {
-            Gizmos.DrawRay(transform.position, Vector3.down * rayLength);
-        }
-    }
+    //    Gizmos.color = Color.red;
+    //    if (isHit)
+    //    {
+    //        Gizmos.DrawRay(transform.position, Vector3.down * hitinfo.distance);
+    //        Gizmos.DrawWireSphere(transform.position + Vector3.down * hitinfo.distance, transform.lossyScale.x / 2);
+    //    }
+    //    else
+    //    {
+    //        Gizmos.DrawRay(transform.position, Vector3.down * rayLength);
+    //    }
+    //}
 
     private void OnCollisionEnter(Collision other)
     {
-        Debug.Log("콜리전 충돌");
-        Invoke(nameof(SetIce), ResetTime);
+        //Debug.Log("콜리전 충돌");
 
+        Invoke(nameof(SetIce), ResetTime);
         gameObject.SetActive(false);
         rb.useGravity = false;
         mycollider.gameObject.SetActive(false);
@@ -94,7 +98,7 @@ public class Icicle : MonoBehaviour
     private void SetIce()
     {
         isDelayTime = true;
-
+        cf.enabled = false;
         rb.isKinematic = false;
         transform.position = startpos;
         gameObject.SetActive(true);

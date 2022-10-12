@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 1619802202150651673}
   - component: {fileID: 1619802202150651672}
   - component: {fileID: 1619802202150651655}
+  - component: {fileID: 1104177087}
   m_Layer: 0
   m_Name: ice_2
   m_TagString: Untagged
@@ -144,8 +145,12 @@ MonoBehaviour:
   layermask:
     serializedVersion: 2
     m_Bits: 512
-  ResetTime: 10
+  ResetTime: 3
   rayLength: 500
+  gravityScale: 1
+  delayTIme: 0.5
+  cf: {fileID: 0}
+  mycollider: {fileID: 0}
 --- !u!54 &1619802202150651655
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -160,8 +165,20 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 122
   m_CollisionDetection: 0
+--- !u!75 &1104177087
+ConstantForce:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1619802202150651674}
+  m_Enabled: 0
+  m_Force: {x: 0, y: -10, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}
 --- !u!1 &1619802202699514969
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,6 +190,7 @@ GameObject:
   - component: {fileID: 1619802202699514968}
   - component: {fileID: 1619802202699514951}
   - component: {fileID: 1619802202699514950}
+  - component: {fileID: 534493087}
   m_Layer: 0
   m_Name: ice_1
   m_TagString: Untagged
@@ -210,8 +228,12 @@ MonoBehaviour:
   layermask:
     serializedVersion: 2
     m_Bits: 512
-  ResetTime: 10
+  ResetTime: 3
   rayLength: 500
+  gravityScale: 1
+  delayTIme: 0.5
+  cf: {fileID: 0}
+  mycollider: {fileID: 0}
 --- !u!54 &1619802202699514950
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -226,8 +248,20 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 122
   m_CollisionDetection: 0
+--- !u!75 &534493087
+ConstantForce:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1619802202699514969}
+  m_Enabled: 0
+  m_Force: {x: 0, y: -10, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}
 --- !u!1 &1619802202845416518
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,6 +273,7 @@ GameObject:
   - component: {fileID: 1619802202845416517}
   - component: {fileID: 1619802202845416516}
   - component: {fileID: 1619802202845416515}
+  - component: {fileID: 1543841934}
   m_Layer: 0
   m_Name: ice_3
   m_TagString: Untagged
@@ -276,8 +311,12 @@ MonoBehaviour:
   layermask:
     serializedVersion: 2
     m_Bits: 512
-  ResetTime: 10
+  ResetTime: 3
   rayLength: 500
+  gravityScale: 1
+  delayTIme: 0.5
+  cf: {fileID: 0}
+  mycollider: {fileID: 0}
 --- !u!54 &1619802202845416515
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -292,8 +331,20 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 122
   m_CollisionDetection: 0
+--- !u!75 &1543841934
+ConstantForce:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1619802202845416518}
+  m_Enabled: 0
+  m_Force: {x: 0, y: -10, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}
 --- !u!1 &1926371123779247139
 GameObject:
   m_ObjectHideFlags: 0
