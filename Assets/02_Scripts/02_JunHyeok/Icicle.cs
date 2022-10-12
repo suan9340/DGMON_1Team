@@ -5,11 +5,11 @@ using UnityEngine;
 public class Icicle : MonoBehaviour
 {
     [SerializeField] LayerMask layermask;
-    [Header("¾óÀ½ Àç¼³Á¤ ½Ã°£")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ ï¿½ç¼³ï¿½ï¿½ ï¿½Ã°ï¿½")]
     public float ResetTime = 10f;
-    [Header("·¹ÀÌ±æÀÌ")]
+    [Header("ï¿½ï¿½ï¿½Ì±ï¿½ï¿½ï¿½")]
     public float rayLength = 1000f;
-    [Header("°íµå¸§ Áß·Â °ª")]
+    [Header("ï¿½ï¿½å¸§ ï¿½ß·ï¿½ ï¿½ï¿½")]
     public float gravityScale = 1f;
 
     private Vector3 endpos = Vector3.zero;
@@ -24,7 +24,7 @@ public class Icicle : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        collider = GetComponent<Collider>();
+        mycollider = GetComponentInChildren<Collider>();
 
         endpos = transform.TransformDirection(Vector3.down);
         startpos = transform.position;
@@ -76,7 +76,7 @@ public class Icicle : MonoBehaviour
     {
         gameObject.SetActive(false);
         rb.useGravity = false;
-        collider.gameObject.SetActive(false);
+        mycollider.gameObject.SetActive(false);
 
         Invoke(nameof(SetIce), ResetTime);
     }
@@ -86,6 +86,6 @@ public class Icicle : MonoBehaviour
         rb.isKinematic = false;
         transform.position = startpos;
         gameObject.SetActive(true);
-        collider.gameObject.SetActive(true);
+        mycollider.gameObject.SetActive(true);
     }
 }
