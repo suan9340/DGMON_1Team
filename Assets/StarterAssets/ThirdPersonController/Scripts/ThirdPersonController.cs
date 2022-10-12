@@ -100,6 +100,7 @@ namespace StarterAssets
 
         // boolen
         public bool isSliding;
+        public bool onIce;
 
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
         private PlayerInput _playerInput;
@@ -179,7 +180,11 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
 
-            if (isSliding == true)
+            if (onIce == true)
+            {
+                OnIce();
+            }
+            else if (isSliding == true)
             {
                 Sliding();
             }
@@ -296,12 +301,28 @@ namespace StarterAssets
         {
             if (Physics.Raycast(transform.position, transform.forward, out hit, minDistance))
             {
-                isSliding = false;
+                onIce = true;
             }
-
-            if(isSliding)
+            
+            if (isSliding)
             {
                 transform.position += transform.TransformDirection(Vector3.forward) * 7.5f * Time.deltaTime;
+            }
+        }
+
+        private void OnIce()
+        {
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                transform.Rotate(0f, -90f, 0f);
+                isSliding = true;
+                onIce = false;
+            }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                transform.Rotate(0f, 90f, 0f);
+                isSliding = true;
+                onIce = false;
             }
         }
 
