@@ -1,9 +1,9 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/02_Scripts/02_JunHyeok.meta
-guid: 5aa266236fa17684e8ada4e97f30eec5
+<<<<<<<< HEAD:Assets/02_Scripts/Puzzles/01_MAP1.meta
+guid: 6625f1e67fa487441ad4c3599a4403c6
 ========
-guid: b13b9df40f1fccc4baeee645d123262f
->>>>>>>> f328991c23c84d0198bb668cac3906e4e9b54af0:Assets/02_Scripts/03_Buseong.meta
+guid: 5aa266236fa17684e8ada4e97f30eec5
+>>>>>>>> f328991c23c84d0198bb668cac3906e4e9b54af0:Assets/02_Scripts/02_JunHyeok.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

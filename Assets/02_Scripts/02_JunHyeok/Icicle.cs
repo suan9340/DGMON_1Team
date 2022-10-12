@@ -7,36 +7,24 @@ public class Icicle : MonoBehaviour
     [SerializeField] LayerMask layermask;
     [Header("얼음 재설정 시간")]
     public float ResetTime = 10f;
-<<<<<<< HEAD
-    public float rayLength = 1000f;
-=======
     [Header("레이길이")]
     public float rayLength = 1000f;
     [Header("고드름 중력 값")]
     public float gravityScale = 1f;
->>>>>>> f328991c23c84d0198bb668cac3906e4e9b54af0
 
     private Vector3 endpos = Vector3.zero;
     private Vector3 startpos = Vector3.zero;
 
     private Rigidbody rb;
-<<<<<<< HEAD
-    private Collider mycollider;
-=======
     private Collider collider;
     public RaycastHit hitinfo;
->>>>>>> f328991c23c84d0198bb668cac3906e4e9b54af0
 
     private bool isCheckd = true;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-<<<<<<< HEAD
-        mycollider = GetComponentInChildren<Collider>();
-=======
         collider = GetComponent<Collider>();
->>>>>>> f328991c23c84d0198bb668cac3906e4e9b54af0
 
         endpos = transform.TransformDirection(Vector3.down);
         startpos = transform.position;
@@ -47,17 +35,6 @@ public class Icicle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-<<<<<<< HEAD
-        Debug.DrawRay(startpos, endpos * rayLength, Color.blue);
-        CheckRay();
-    }
-
-    private void CheckRay()
-    {
-        float capsuleScale = Mathf.Max(transform.lossyScale.x, transform.lossyScale.z);
-
-        if (Physics.CapsuleCast(startpos, startpos, capsuleScale / 2f, endpos, out RaycastHit hitinfo, rayLength, layermask))
-=======
         RayCast();
     }
 
@@ -66,23 +43,15 @@ public class Icicle : MonoBehaviour
         float spehereScale = Mathf.Max(transform.lossyScale.x, transform.lossyScale.y, transform.lossyScale.z);
 
         if (Physics.SphereCast(startpos, spehereScale / 2f, endpos, out hitinfo, rayLength, layermask))
->>>>>>> f328991c23c84d0198bb668cac3906e4e9b54af0
         {
             if (isCheckd) return;
             rb.useGravity = true;
             isCheckd = true;
-<<<<<<< HEAD
-            Debug.Log("인식했다고 tlqkf.");
-=======
->>>>>>> f328991c23c84d0198bb668cac3906e4e9b54af0
         }
         else
         {
             if (isCheckd == false) return;
             isCheckd = false;
-<<<<<<< HEAD
-            Debug.Log("인식안됐다고 tlqkf.");
-=======
         }
     }
 
@@ -100,7 +69,6 @@ public class Icicle : MonoBehaviour
         else
         {
             Gizmos.DrawRay(transform.position, Vector3.down * rayLength);
->>>>>>> f328991c23c84d0198bb668cac3906e4e9b54af0
         }
     }
 
@@ -108,11 +76,7 @@ public class Icicle : MonoBehaviour
     {
         gameObject.SetActive(false);
         rb.useGravity = false;
-<<<<<<< HEAD
-        mycollider.gameObject.SetActive(false);
-=======
         collider.gameObject.SetActive(false);
->>>>>>> f328991c23c84d0198bb668cac3906e4e9b54af0
 
         Invoke(nameof(SetIce), ResetTime);
     }
@@ -122,10 +86,6 @@ public class Icicle : MonoBehaviour
         rb.isKinematic = false;
         transform.position = startpos;
         gameObject.SetActive(true);
-<<<<<<< HEAD
-        mycollider.gameObject.SetActive(true);
-=======
         collider.gameObject.SetActive(true);
->>>>>>> f328991c23c84d0198bb668cac3906e4e9b54af0
     }
 }
