@@ -30,6 +30,7 @@ public class ParticleManager : MonoBehaviour
     public enum ParticleType
     {
         startPointEat,
+        LevelUp,
     }
 
     public int AddParticle(ParticleType pt, Vector3 pos)
@@ -40,6 +41,13 @@ public class ParticleManager : MonoBehaviour
                 if (false == particleDic.ContainsKey(pt))
                 {
                     particleDic[pt] = Resources.Load<GameObject>("VFX/StarEat_VFX");
+                }
+                break;
+
+            case ParticleType.LevelUp:
+                if (false == particleDic.ContainsKey(pt))
+                {
+                    particleDic[pt] = Resources.Load<GameObject>("VFX/LevelUp");
                 }
                 break;
 
