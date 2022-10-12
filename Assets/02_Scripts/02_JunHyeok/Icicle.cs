@@ -5,14 +5,14 @@ using UnityEngine;
 public class Icicle : MonoBehaviour
 {
     [SerializeField] LayerMask layermask;
-    [Header("얼음 재설정 시간")]
+    [Header("?�음 ?�설???�간")]
     public float ResetTime = 10f;
-    [Header("레이길이")]
+    [Header("?�이길이")]
     public float rayLength = 1000f;
-    [Header("고드름 중력 값")]
+    [Header("고드�?중력 �?")]
     public float gravityScale = 1f;
-    [Header("딜레이 타임")]
-    public float delayTIme = 0.5f;
+    [Header("?�레???�??")]
+    public float delayTIme = 1f;
 
     private Vector3 endpos = Vector3.zero;
     private Vector3 startpos = Vector3.zero;
@@ -23,7 +23,6 @@ public class Icicle : MonoBehaviour
     public RaycastHit hitinfo;
 
     private bool isCheckd = true;
-    private bool isDelayTime = false;
 
     void Start()
     {
@@ -45,61 +44,58 @@ public class Icicle : MonoBehaviour
 
     private void RayCast()
     {
-        if (isDelayTime) return;
-
         float spehereScale = Mathf.Max(transform.lossyScale.x, transform.lossyScale.y, transform.lossyScale.z);
 
         if (Physics.SphereCast(startpos, spehereScale / 2f, endpos, out hitinfo, rayLength, layermask))
         {
             if (isCheckd) return;
 
-            //Debug.Log("부딪혔다");
+            //Debug.Log("부?�혔??);
+            
             rb.useGravity = true;
             isCheckd = true;
-
             cf.enabled = true;
         }
         else
         {
             if (isCheckd == false) return;
             cf.enabled = false;
-            //Debug.Log("안 부딪혔다");
+            //Debug.Log("??부?�혔??);
             isCheckd = false;
         }
     }
 
-    //private void OnDrawGizmos()
-    //{
-    //    float spehereScale = Mathf.Max(transform.lossyScale.x, transform.lossyScale.y, transform.lossyScale.z);
-    //    bool isHit = Physics.SphereCast(startpos, spehereScale / 2f, endpos, out hitinfo, rayLength, layermask);
+    private void OnDrawGizmos()
+    {
+        float spehereScale = Mathf.Max(transform.lossyScale.x, transform.lossyScale.y, transform.lossyScale.z);
+        bool isHit = Physics.SphereCast(startpos, spehereScale / 2f, endpos, out hitinfo, rayLength, layermask);
 
-    //    Gizmos.color = Color.red;
-    //    if (isHit)
-    //    {
-    //        Gizmos.DrawRay(transform.position, Vector3.down * hitinfo.distance);
-    //        Gizmos.DrawWireSphere(transform.position + Vector3.down * hitinfo.distance, transform.lossyScale.x / 2);
-    //    }
-    //    else
-    //    {
-    //        Gizmos.DrawRay(transform.position, Vector3.down * rayLength);
-    //    }
-    //}
+        Gizmos.color = Color.red;
+        if (isHit)
+        {
+            Gizmos.DrawRay(transform.position, Vector3.down * hitinfo.distance);
+            Gizmos.DrawWireSphere(transform.position + Vector3.down * hitinfo.distance, transform.lossyScale.x / 2);
+        }
+        else
+        {
+            Gizmos.DrawRay(transform.position, Vector3.down * rayLength);
+        }
+    }
 
     private void OnCollisionEnter(Collision other)
     {
-        //Debug.Log("콜리전 충돌");
-
+        Transform pos = other.transform;
+        ParticleManager.Instance.AddParticle(ParticleManager.ParticleType.LevelUp, pos.position);
         Invoke(nameof(SetIce), ResetTime);
         gameObject.SetActive(false);
         rb.useGravity = false;
+        cf.enabled = false;
         mycollider.gameObject.SetActive(false);
     }
 
     private void SetIce()
     {
-        isDelayTime = true;
-        cf.enabled = false;
-        rb.isKinematic = false;
+        rb.isKinematic = true;
         transform.position = startpos;
         gameObject.SetActive(true);
         mycollider.gameObject.SetActive(true);
@@ -109,6 +105,7 @@ public class Icicle : MonoBehaviour
 
     private void SetDelay()
     {
-        isDelayTime = false;
+        isCheckd = false;
+        rb.isKinematic = false;
     }
 }

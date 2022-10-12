@@ -8559,13 +8559,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2088153474718779516, guid: 19e8784c7ccd7584ab2adafd33e47f00, type: 3}
+      propertyPath: m_Type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2088153474718779516, guid: 19e8784c7ccd7584ab2adafd33e47f00, type: 3}
+      propertyPath: m_Range
+      value: 2.132632
+      objectReference: {fileID: 0}
+    - target: {fileID: 2088153474718779516, guid: 19e8784c7ccd7584ab2adafd33e47f00, type: 3}
+      propertyPath: m_Intensity
+      value: 2.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2088153474718779516, guid: 19e8784c7ccd7584ab2adafd33e47f00, type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4297925971486537298, guid: 19e8784c7ccd7584ab2adafd33e47f00, type: 3}
       propertyPath: m_Name
       value: LevelUp
       objectReference: {fileID: 0}
     - target: {fileID: 4297925971486537298, guid: 19e8784c7ccd7584ab2adafd33e47f00, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4297925971486721062, guid: 19e8784c7ccd7584ab2adafd33e47f00, type: 3}
       propertyPath: m_RootOrder
