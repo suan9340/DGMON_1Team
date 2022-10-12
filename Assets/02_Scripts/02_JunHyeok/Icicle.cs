@@ -1,29 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class Icicle : MonoBehaviour
 {
     [SerializeField] LayerMask layermask;
-    [Header("?ºÏùå ?¨ÏÑ§???úÍ∞Ñ")]
     public float ResetTime = 10f;
-    [Header("?àÏù¥Í∏∏Ïù¥")]
     public float rayLength = 1000f;
-    [Header("Í≥†ÎìúÎ¶?Ï§ëÎ†• Í∞?")]
     public float gravityScale = 1f;
-    [Header("?úÎ†à???Ä??")]
     public float delayTIme = 1f;
 
     private Vector3 endpos = Vector3.zero;
     private Vector3 startpos = Vector3.zero;
 
     private Rigidbody rb;
-    public ConstantForce cf;
-    public Collider mycollider;
+    private ConstantForce cf;
+    private Collider mycollider;
     public RaycastHit hitinfo;
 
     private bool isCheckd = true;
+    public Transform particlepos;
 
+    private bool isDropping = false;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -50,55 +50,65 @@ public class Icicle : MonoBehaviour
         {
             if (isCheckd) return;
 
-            //Debug.Log("Î∂Ä?™Ìòî??);
-            
             rb.useGravity = true;
-            isCheckd = true;
-            cf.enabled = true;
+            CheckRayCast(true);
         }
         else
         {
             if (isCheckd == false) return;
-            cf.enabled = false;
-            //Debug.Log("??Î∂Ä?™Ìòî??);
-            isCheckd = false;
+
+            CheckRayCast(false);
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        float spehereScale = Mathf.Max(transform.lossyScale.x, transform.lossyScale.y, transform.lossyScale.z);
-        bool isHit = Physics.SphereCast(startpos, spehereScale / 2f, endpos, out hitinfo, rayLength, layermask);
+    //private void OnDrawGizmos()
+    //{
+    //    float spehereScale = Mathf.Max(transform.lossyScale.x, transform.lossyScale.y, transform.lossyScale.z);
+    //    bool isHit = Physics.SphereCast(startpos, spehereScale / 2f, endpos, out hitinfo, rayLength, layermask);
 
-        Gizmos.color = Color.red;
-        if (isHit)
-        {
-            Gizmos.DrawRay(transform.position, Vector3.down * hitinfo.distance);
-            Gizmos.DrawWireSphere(transform.position + Vector3.down * hitinfo.distance, transform.lossyScale.x / 2);
-        }
-        else
-        {
-            Gizmos.DrawRay(transform.position, Vector3.down * rayLength);
-        }
-    }
+    //    Gizmos.color = Color.red;
+    //    if (isHit)
+    //    {
+    //        Gizmos.DrawRay(transform.position, Vector3.down * hitinfo.distance);
+    //        Gizmos.DrawWireSphere(transform.position + Vector3.down * hitinfo.distance, transform.lossyScale.x / 2);
+    //    }
+    //    else
+    //    {
+    //        Gizmos.DrawRay(transform.position, Vector3.down * rayLength);
+    //    }
+    //}
 
     private void OnCollisionEnter(Collision other)
     {
-        Transform pos = other.transform;
-        ParticleManager.Instance.AddParticle(ParticleManager.ParticleType.LevelUp, pos.position);
+        if (isDropping) return;
+
+        isDropping = true;
+        if (other.gameObject.CompareTag("Player"))
+        {
+            ParticleManager.Instance.AddParticle(ParticleManager.ParticleType.dropIce_2, particlepos.position);
+        }
+        else
+        {
+            ParticleManager.Instance.AddParticle(ParticleManager.ParticleType.dropIce_1, particlepos.position);
+        }
+
         Invoke(nameof(SetIce), ResetTime);
+
+        mycollider.gameObject.SetActive(false);
         gameObject.SetActive(false);
+
         rb.useGravity = false;
         cf.enabled = false;
-        mycollider.gameObject.SetActive(false);
     }
 
     private void SetIce()
     {
         rb.isKinematic = true;
-        transform.position = startpos;
+
         gameObject.SetActive(true);
         mycollider.gameObject.SetActive(true);
+
+        transform.position = startpos;
 
         Invoke(nameof(SetDelay), delayTIme);
     }
@@ -107,5 +117,12 @@ public class Icicle : MonoBehaviour
     {
         isCheckd = false;
         rb.isKinematic = false;
+        isDropping = false;
+    }
+
+    private void CheckRayCast(bool _isboolen)
+    {
+        isCheckd = _isboolen;
+        cf.enabled = _isboolen;
     }
 }

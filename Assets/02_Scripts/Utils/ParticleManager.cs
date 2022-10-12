@@ -30,7 +30,8 @@ public class ParticleManager : MonoBehaviour
     public enum ParticleType
     {
         startPointEat,
-        LevelUp,
+        dropIce_1,
+        dropIce_2,
     }
 
     public int AddParticle(ParticleType pt, Vector3 pos)
@@ -44,10 +45,17 @@ public class ParticleManager : MonoBehaviour
                 }
                 break;
 
-            case ParticleType.LevelUp:
+            case ParticleType.dropIce_1:
                 if (false == particleDic.ContainsKey(pt))
                 {
-                    particleDic[pt] = Resources.Load<GameObject>("VFX/LevelUp");
+                    particleDic[pt] = Resources.Load<GameObject>("VFX/drop_Ice_1");
+                }
+                break;
+
+            case ParticleType.dropIce_2:
+                if (false == particleDic.ContainsKey(pt))
+                {
+                    particleDic[pt] = Resources.Load<GameObject>("VFX/drop_Ice_2");
                 }
                 break;
 

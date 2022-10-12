@@ -14468,7 +14468,7 @@ GameObject:
   - component: {fileID: 9158173074156779756}
   - component: {fileID: 9158173074156800514}
   m_Layer: 0
-  m_Name: LevelUp
+  m_Name: drop_Ice_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
