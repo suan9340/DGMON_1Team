@@ -5,21 +5,24 @@ using UnityEngine;
 public class Icicle : MonoBehaviour
 {
     [SerializeField] LayerMask layermask;
-    [Header("���� �缳�� �ð�")]
+    [Header("얼음 재설정 시간")]
     public float ResetTime = 10f;
-    [Header("���̱���")]
+    [Header("레이길이")]
     public float rayLength = 1000f;
-    [Header("��帧 �߷� ��")]
+    [Header("고드름 중력 값")]
     public float gravityScale = 1f;
+    [Header("딜레이 타임")]
+    public float delayTIme = 0.5f;
 
     private Vector3 endpos = Vector3.zero;
     private Vector3 startpos = Vector3.zero;
 
     private Rigidbody rb;
-    private Collider collider;
+    public Collider mycollider;
     public RaycastHit hitinfo;
 
     private bool isCheckd = true;
+    private bool isDelayTime = false;
 
     void Start()
     {
@@ -40,17 +43,23 @@ public class Icicle : MonoBehaviour
 
     private void RayCast()
     {
+        if (isDelayTime) return;
+
         float spehereScale = Mathf.Max(transform.lossyScale.x, transform.lossyScale.y, transform.lossyScale.z);
 
         if (Physics.SphereCast(startpos, spehereScale / 2f, endpos, out hitinfo, rayLength, layermask))
         {
             if (isCheckd) return;
+
+            Debug.Log("부딪혔다");
             rb.useGravity = true;
             isCheckd = true;
         }
         else
         {
             if (isCheckd == false) return;
+
+            Debug.Log("안 부딪혔다");
             isCheckd = false;
         }
     }
@@ -74,18 +83,28 @@ public class Icicle : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        Debug.Log("콜리전 충돌");
+        Invoke(nameof(SetIce), ResetTime);
+
         gameObject.SetActive(false);
         rb.useGravity = false;
         mycollider.gameObject.SetActive(false);
-
-        Invoke(nameof(SetIce), ResetTime);
     }
 
     private void SetIce()
     {
+        isDelayTime = true;
+
         rb.isKinematic = false;
         transform.position = startpos;
         gameObject.SetActive(true);
         mycollider.gameObject.SetActive(true);
+
+        Invoke(nameof(SetDelay), delayTIme);
+    }
+
+    private void SetDelay()
+    {
+        isDelayTime = false;
     }
 }
