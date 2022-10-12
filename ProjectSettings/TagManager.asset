@@ -17,6 +17,7 @@ TagManager:
   - CinemachineTarget
   - PUZZLE1
   - PUZZLE3
+  - Torch
   layers:
   - Default
   - TransparentFX
@@ -28,7 +29,7 @@ TagManager:
   - PostProcess
   - 
   - Player
-  - 
+  - Ice_Block
   - 
   - 
   - 
