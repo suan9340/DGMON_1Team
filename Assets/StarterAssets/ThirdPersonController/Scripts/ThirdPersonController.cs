@@ -98,6 +98,10 @@ namespace StarterAssets
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
 
+        // boolen
+        public bool isSliding;
+        public bool onIce;
+
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
         private PlayerInput _playerInput;
 #endif
@@ -111,6 +115,10 @@ namespace StarterAssets
         private bool _hasAnimator;
 
         private PlayerData playerData;
+
+        //IceSliding
+        RaycastHit hit;
+        float minDistance = 1f;
 
         private bool IsCurrentDeviceMouse
         {
@@ -171,7 +179,19 @@ namespace StarterAssets
 
             JumpAndGravity();
             GroundedCheck();
-            Move();
+
+            if (onIce == true)
+            {
+                OnIce();
+            }
+            else if (isSliding == true)
+            {
+                Sliding();
+            }
+            else
+            {
+                Move();
+            }
         }
 
         private void LateUpdate()
@@ -274,6 +294,35 @@ namespace StarterAssets
             {
                 _animator.SetFloat(_animIDSpeed, _animationBlend);
                 _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
+            }
+        }
+
+        private void Sliding()
+        {
+            if (Physics.Raycast(transform.position, transform.forward, out hit, minDistance))
+            {
+                onIce = true;
+            }
+            
+            if (isSliding)
+            {
+                transform.position += transform.TransformDirection(Vector3.forward) * 7.5f * Time.deltaTime;
+            }
+        }
+
+        private void OnIce()
+        {
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                transform.Rotate(0f, -90f, 0f);
+                isSliding = true;
+                onIce = false;
+            }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                transform.Rotate(0f, 90f, 0f);
+                isSliding = true;
+                onIce = false;
             }
         }
 
@@ -398,6 +447,16 @@ namespace StarterAssets
 
         }
 
-
+        private void OnCollisionStay(Collision collision)
+        {
+            if (collision.gameObject.CompareTag("Ice"))
+            {
+                isSliding = true;
+            }
+            else
+            {
+                isSliding = false;
+            }
+        }
     }
 }

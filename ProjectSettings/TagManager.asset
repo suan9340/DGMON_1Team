@@ -17,6 +17,7 @@ TagManager:
   - CinemachineTarget
   - PUZZLE1
   - PUZZLE3
+  - Ice
   layers:
   - Default
   - TransparentFX
