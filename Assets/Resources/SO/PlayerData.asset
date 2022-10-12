@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94a663f14f315364481ec2d896481d49, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  sensivity: 6.627241
+  sensivity: 3.241643
   starCnt: 0
   needStars: 0200000006000000
   isClear0: 1
