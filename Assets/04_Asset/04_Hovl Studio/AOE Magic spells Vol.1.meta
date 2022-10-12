@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/04_Asset/04_Hovl Studio/AOE Magic spells Vol.1.meta
 guid: 2a4a2ba7ad107514592eb523ce27a19e
+========
+guid: 7dbe006500179c94a8f422d28e042644
+>>>>>>>> f328991c23c84d0198bb668cac3906e4e9b54af0:Assets/02_Scripts/03_Seonbin.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
