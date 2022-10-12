@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/04_Asset/PureNature/Prefabs/Ruins/Paveway01 (2.prefab.meta
+guid: f73e15b03e7ad7b4f868a6f042179280
+PrefabImporter:
+========
 guid: 7b9604bf2ead3504897b802a124e451d
 DefaultImporter:
+>>>>>>>> main:Assets/UIGradient/Demo/Demo.unity.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

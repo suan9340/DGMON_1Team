@@ -1,5 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/02_Scripts/Taurus_Puzzle_Sample.meta
+guid: b4d955567531c744bb48818754c42d9c
+folderAsset: yes
+========
 guid: b5f957873a5b82042967195ffffc9063
+>>>>>>>> main:Assets/StarterAssets/StarterAssets_Documentation_v1.1.pdf.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

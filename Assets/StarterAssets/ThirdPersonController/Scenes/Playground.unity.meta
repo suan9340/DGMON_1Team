@@ -1,5 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/ProBuilder Data.meta
+guid: 8a8d964eb5f7e4c49939464fd68ff772
+folderAsset: yes
+========
 guid: e9017d5f96b9f09489b4b37e1d6eb914
+>>>>>>>> main:Assets/StarterAssets/ThirdPersonController/Scenes/Playground.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
