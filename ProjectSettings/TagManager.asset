@@ -18,6 +18,7 @@ TagManager:
   - PUZZLE1
   - PUZZLE3
   - Torch
+  - Ice
   layers:
   - Default
   - TransparentFX
